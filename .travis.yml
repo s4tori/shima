@@ -31,3 +31,40 @@ matrix:
               email:
                   on_success: never
                   on_failure: always
+
+
+        ############################################################################
+        # Documentation
+        ############################################################################
+        - language: node_js
+          node_js: "8"
+
+          cache:
+              directories:
+                  - docs/node_modules
+
+          before_install:
+              - echo "commit message = $TRAVIS_COMMIT_MESSAGE"
+              - if [[ ! $TRAVIS_COMMIT_MESSAGE =~ ':books:' ]]; then travis_terminate 0; fi
+
+          install:
+              - cd ${TRAVIS_BUILD_DIR}/docs
+              - npm install
+
+          script:
+              - npm run build:prod
+              # - ls -lah ./dist
+
+          deploy:
+              provider: pages
+              skip_cleanup: true
+              github_token: $GITHUB_TOKEN
+              local_dir: "${TRAVIS_BUILD_DIR}/docs/dist"
+              target_branch: gh-pages
+              on:
+                  branch: master
+
+          notifications:
+              email:
+                  on_success: never
+                  on_failure: always
