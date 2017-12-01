@@ -1,0 +1,12 @@
+{
+	"name": "shima",
+	"version": "0.1.0",
+	"description": "CSS Grid Overlay",
+	"author": [
+		"s4tori <s4tori.rn@gmail.com>"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git@bitbucket.org:s4tori/shima.git"
+	}
+}

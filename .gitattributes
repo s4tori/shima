@@ -1,0 +1,2 @@
+# Windows bash scripts are also Unix LF endings
+*.sh	eol=lf
