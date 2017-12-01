@@ -19,7 +19,7 @@ matrix:
               # - ls -lah ./bin
 
           after_success:
-              - echo -e "Host *\n\tStrictHostKeyChecking no\n\tLogLevel=quiet\n" > ~/.ssh/config
+              - echo -e "Host *\n\tUser $VPS_USER\n\tStrictHostKeyChecking no\n\tLogLevel=quiet\n" > ~/.ssh/config
               - echo -e $TRAVIS_PRIVATE_KEY > ~/.ssh/id_rsa_travis
               - chmod 600 ~/.ssh/id_rsa_travis
               - eval "$(ssh-agent -s)"
