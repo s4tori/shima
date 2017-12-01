@@ -44,7 +44,7 @@ Shima is [MIT licensed](./LICENSE).
 [//]: # (---------------------------------------------------------------------)
 
 [//]: # (Badges)
-[build]:       https://travis-ci.org/s4tori/shima-test.svg?branch=master
-[build-url]:   https://travis-ci.org/s4tori/shima-test
+[build]:       https://travis-ci.org/s4tori/shima.svg?branch=master
+[build-url]:   https://travis-ci.org/s4tori/shima
 [license]:     https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]: ./LICENSE
