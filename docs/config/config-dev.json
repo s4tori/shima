@@ -1,0 +1,7 @@
+{
+	"client": {
+		"base"   : "http://localhost:1337/",
+		"urlGrid": "http://localhost:7331/img/",
+		"teaser" : true
+	}
+}

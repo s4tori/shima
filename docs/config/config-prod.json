@@ -1,0 +1,13 @@
+{
+	"client": {
+		"base"     : "https://shima-grid.com/",
+		"urlGrid"  : "https://shima-grid.com/img/",
+		"urlSource": "https://github.com/s4tori/shima",
+		"teaser"   : true
+	},
+
+	"server": {
+		"host": "localhost",
+		"port": "1337"
+	}
+}

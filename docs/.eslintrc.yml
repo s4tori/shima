@@ -1,0 +1,75 @@
+root: true
+
+env:
+   es6: true
+   node: true
+
+plugins:
+    - vue
+    #- html
+
+extends:
+    - plugin:vue/recommended
+
+parserOptions:
+    ecmaVersion: 8
+    sourceType: module
+    ecmaFeatures:
+        experimentalObjectRestSpread: true
+        jsx: true
+
+globals:
+    __DEVELOPMENT__: true
+    __CONFIG__: true
+
+rules:
+    array-bracket-spacing: ["warn", "never"]
+    block-spacing: ["warn", "always"]
+    brace-style: ["off", "1tbs", { allowSingleLine: true }]
+    camelcase: ["error", { properties: "never" }]
+    computed-property-spacing: ["warn", "never"]
+    eol-last: ["error", "always"]
+    func-call-spacing: ["warn", "never"]
+    indent: ["warn", "tab", { "SwitchCase": 1, "VariableDeclarator": 1 }]
+    keyword-spacing: ["warn", { before: true, after: true}]
+    object-curly-spacing: ["warn", "always"]
+    #linebreak-style: ["error", "unix"]
+
+    no-console: "warn"
+    no-debugger: "error"
+    no-extra-semi: "error"
+    no-mixed-spaces-and-tabs: ["warn", "smart-tabs"]
+    no-multiple-empty-lines: ["warn", { max: 2, maxEOF: 1 }]
+    no-irregular-whitespace: "error"
+    no-template-curly-in-string: "error"
+    no-spaced-func: "error"
+    no-trailing-spaces: "warn"
+    no-unexpected-multiline: "error"
+    quotes: ["error", "double", { avoidEscape: true, allowTemplateLiterals: true }]
+    semi: "warn"
+    semi-spacing: ["warn", { before: false, after: true }]
+    space-before-blocks: "warn"
+    space-before-function-paren: ["warn", { anonymous: "always", named: "never", asyncArrow: "always" }]
+    space-in-parens: ["warn", "never"]
+    space-infix-ops: "warn"
+    unicode-bom: ["error", "never"]
+
+    eqeqeq: ["error", "always"]
+    new-cap: ["error", { "capIsNewExceptions": ["ObjectId"], properties: false }]
+    no-dupe-args: "error"
+    no-dupe-keys: "error"
+    no-duplicate-case: "error"
+    no-empty: "error"
+    no-ex-assign: "error"
+    no-func-assign: "error"
+    no-inner-declarations: "error"
+    no-param-reassign: ["error", { "props": false }]
+    no-redeclare: ["error", { "builtinGlobals": true }]
+    no-undef: "error"
+    no-unused-expressions: ["error", { "allowShortCircuit": true, "allowTernary": true }]
+    no-unused-vars: ["error", { "vars": "local", "args": "after-used" }]
+    no-unreachable: "error"
+    no-var: "error"
+    valid-typeof: ["error", { requireStringLiterals: true }]
+
+    vue/jsx-uses-vars: "error"
