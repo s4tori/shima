@@ -1,0 +1,33 @@
+matrix:
+    include:
+        ############################################################################
+        # Go server
+        ############################################################################
+        - language: go
+          go: 1.9.x
+
+          before_install:
+              - echo "commit message = $TRAVIS_COMMIT_MESSAGE"
+              - if [[ $TRAVIS_COMMIT_MESSAGE =~ ':books:' ]]; then travis_terminate 0; fi
+
+          install:
+              - cd ${TRAVIS_BUILD_DIR}/go
+
+          script:
+              - ./run.sh -t
+              - ./run.sh -b
+              # - ls -lah ./bin
+
+          after_success:
+              - echo -e "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+              - echo -e $TRAVIS_PRIVATE_KEY > ~/.ssh/id_rsa_travis
+              - chmod 600 ~/.ssh/id_rsa_travis
+              - eval "$(ssh-agent -s)"
+              - ssh-add ~/.ssh/id_rsa_travis
+              - rsync -p --chmod=700 ./bin/shima $VPS_HOST:$VPS_DIST/shima
+              - ssh $VPS_HOST pm2 restart shima > /dev/null
+
+          notifications:
+              email:
+                  on_success: never
+                  on_failure: always
