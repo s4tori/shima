@@ -1,0 +1,58 @@
+///////////////////////////////////////////////////////////////////////////////
+/// Defaults variables
+
+// text
+$base-font-size       ?= 24px
+$base-line-height     ?= 32px
+$base-text-color      ?= #666
+$base-font-size-ratio ?= 1.30
+$base-bg              ?= #F1F3F5
+$base-font-code       ?= Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace
+
+// spacing
+$base-spacing         ?= $base-line-height
+$base-spacing--xs     ?= round($base-spacing / 4)
+$base-spacing--sm     ?= round($base-spacing / 2)
+$base-spacing--lg     ?= round($base-spacing * 2)
+$base-spacing--xl     ?= round($base-spacing * 4)
+$base-spacing--xxl    ?= round($base-spacing * 6)
+
+// grid (♥ vertical rhythm ♥)
+$grid-cell            ?= 32px
+$grid-column          ?= $grid-cell * 4
+$grid-gutter          ?= 32px
+$grid-spread          ?= "narrow"
+
+// env
+$base-dev             ?= __DEV__ is defined and __DEV__ is true
+$base-url             ?= __URL__
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Colors
+
+$base-color ?= {
+	default  : #111
+	blue     : #678
+	api      : #333
+	bg-url   : #FAFAFA
+	bg-code  : #F5F6F9
+	cb-active: #5C87FF
+	ip-active: #111
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Breakpoints
+
+$base-bp ?= {
+	sm:           "screen and (max-width: 29.9375em)",
+	md:           "screen and (min-width: 30em) and (max-width: 47.9375em)",
+	lg:           "screen and (min-width: 75em)",
+	md-and-dn:    "screen and (max-width: 47.9375em)",
+	md-and-up:    "screen and (min-width: 75em)",
+	retina:       "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)"
+}
+
+
+///////////////////////////////////////////////////////////////////////////////

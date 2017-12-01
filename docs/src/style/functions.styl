@@ -1,0 +1,26 @@
+///////////////////////////////////////////////////////////////////////////////
+/// Functions
+
+@import "./settings"
+
+
+shima-font-size(ratio = 1, line-height = $base-line-height)
+	font-size round($base-font-size * ($base-font-size-ratio ** ratio), 6)
+	line-height line-height
+	line-height (line-height / $base-font-size) rem
+
+shima-vr(nb = 1)
+	return nb * $base-line-height
+
+shima-span(nb = 1, spread = $grid-spread)
+	w = unit(nb, px) * ($grid-column + $grid-gutter)
+	return w                if spread is "wide"
+	return w - $grid-gutter if spread is "narrow"
+	return w + $grid-gutter if spread is "wider"
+	return w
+
+shima-gutter(nb = 1)
+	return nb * $grid-gutter
+
+
+///////////////////////////////////////////////////////////////////////////////
