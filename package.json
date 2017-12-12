@@ -2,11 +2,23 @@
 	"name": "shima",
 	"version": "0.1.0",
 	"description": "CSS Grid Overlay",
+	"homepage": "https://shima-grid.com/",
+	"license": "MIT",
+	"keywords": [
+		"grid",
+		"css",
+		"web-design",
+		"web-development",
+		"vertical-rhythm"
+	],
 	"author": [
 		"s4tori <s4tori.rn@gmail.com>"
 	],
 	"repository": {
 		"type": "git",
-		"url": "git@bitbucket.org:s4tori/shima.git"
+		"url": "git+https://github.com/s4tori/shima.git"
+	},
+	"bugs": {
+		"url": "https://github.com/s4tori/shima/issues"
 	}
 }

@@ -2,6 +2,8 @@
 	"name": "@shima/docs",
 	"version": "0.1.0",
 	"description": "Shima documentation",
+	"homepage": "https://shima-grid.com/",
+	"license": "MIT",
 	"author": [
 		"s4tori <s4tori.rn@gmail.com>"
 	],
