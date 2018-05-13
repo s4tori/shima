@@ -1,7 +1,8 @@
-const path                 = require("path");
-const WebpackCleanupPlugin = require("webpack-cleanup-plugin");
-const CopyWebpackPlugin    = require("copy-webpack-plugin");
-const dir                  = require("../dir");
+const path                = require("path");
+const CleanWebpackPlugin  = require("clean-webpack-plugin");
+const CopyWebpackPlugin   = require("copy-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
+const dir                 = require("../dir");
 
 
 module.exports = {
@@ -31,7 +32,13 @@ module.exports = {
 	},
 
 	plugins: [
-		new WebpackCleanupPlugin(),
+		new VueLoaderPlugin(),
+
+		new CleanWebpackPlugin(["index.html", "humans.txt", "assets/**/*.*"], {
+			root: dir.dist,
+			dry: false,
+			verbose: false
+		}),
 
 		new CopyWebpackPlugin([
 			{ from: path.resolve(dir.stat, "humans.txt")       , to : dir.dist },

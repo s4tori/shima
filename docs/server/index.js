@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const Koa     = require("koa");
-const conf    = require("../config/config")(process.env.NODE_EN);
+const conf    = require("../config/config")(process.env.NODE_ENV);
 const devUtil = require("./index.dev");
 
 

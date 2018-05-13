@@ -31,18 +31,24 @@ module.exports = (app) => {
 				colors: true,
 				modules: false
 			}
+		},
+		hot: {
+			reload: false
 		}
 	});
 	app.use(middlewares);
 
 	// Force page reload when a file processed by html-webpack-plugin changes
-	compiler.plugin("compilation", function (compilation) {
-		compilation.plugin("html-webpack-plugin-after-emit", function (data, cb) {
+	compiler.hooks.compilation.tap("HmrHtml", (compilation) => {
+		compilation.hooks.htmlWebpackPluginAfterEmit.tapAsync("HmrHtml", (data, cb) => {
 			// html-webpack-plugin always emits HMR event for each change (cache issue)
 			// See: https://github.com/jantimon/html-webpack-plugin/issues/680
+			// See: https://github.com/webpack-contrib/webpack-hot-client#communicating-with-client-websockets
 			if (htmlManager.html !== data.html.source()) {
 				htmlManager.setHtml(data.html.source());
-				middlewares.hot.publish({ action: "reload" });
+				// eslint-disable-next-line no-console
+				console.log("info", "[build   ]", "HTML page updated, call window-reload socket event...");
+				middlewares.client.wss.broadcast(JSON.stringify({ type: "window-reload" }));
 			}
 
 			cb(null, data);
