@@ -59,7 +59,7 @@ matrix:
               provider: pages
               skip_cleanup: true
               github_token: $GITHUB_TOKEN
-              local_dir: "${TRAVIS_BUILD_DIR}/docs/dist"
+              local_dir: "docs/dist"
               target_branch: gh-pages
               on:
                   branch: master
