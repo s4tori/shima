@@ -1,7 +1,7 @@
 <template>
 	<p class="shima-checkbox">
-		<input  :id="cid" type="checkbox" @change="updateValue" :checked="value" />
-		<label :for="cid"><slot></slot></label>
+		<input :id="cid" :checked="value" type="checkbox" @change="updateValue" />
+		<label :for="cid"><slot /></label>
 	</p>
 </template>
 <style lang="stylus">

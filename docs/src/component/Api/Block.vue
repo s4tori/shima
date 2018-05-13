@@ -1,9 +1,9 @@
 <template>
-	<div class="block" :id="id">
-		<h3 class="block__title"><a :href="'#' + id">{{title}} <icon i="anchor" /></a></h3>
+	<div :id="id" class="block">
+		<h3 class="block__title"><a :href="'#' + id">{{ title }} <icon i="anchor" /></a></h3>
 		<div class="block__content">
 			<ul class="block__list">
-				<slot></slot>
+				<slot />
 			</ul>
 		</div>
 	</div>

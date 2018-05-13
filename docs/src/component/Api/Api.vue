@@ -3,7 +3,7 @@
 		<h2 id="api">
 			<a href="#api">▨ API <icon i="anchor" /></a>
 		</h2>
-		<wrapper class="api__content" :grid="grid" top>
+		<wrapper :grid="grid" class="api__content" top>
 			<shima-checkbox v-model="grid" class="api__cb">Show grid</shima-checkbox>
 			<api-general />
 			<api-axis />
@@ -67,12 +67,6 @@ import ShimaCheckbox from "src/component/Checkbox.vue";
 
 export default {
 
-	data() {
-		return {
-			grid: false
-		};
-	},
-
 	components: {
 		ApiGeneral,
 		ApiAxis,
@@ -80,6 +74,12 @@ export default {
 		Wrapper,
 		Icon,
 		ShimaCheckbox
+	},
+
+	data() {
+		return {
+			grid: false
+		};
 	}
 
 };

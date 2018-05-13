@@ -2,9 +2,10 @@
 	<div class="grid-url">
 		<div class="grid-url__value"  target="_blank">{{ url }}</div>
 		<button
-			class="grid-url__button" :class="clsButton"
-			v-clipboard:copy="url" @copied="copied">
-			{{text}}
+			v-clipboard:copy="url"
+			:class="clsButton" class="grid-url__button"
+			@copied="copied">
+			{{ text }}
 		</button>
 	</div>
 </template>

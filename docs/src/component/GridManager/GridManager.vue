@@ -1,5 +1,5 @@
 <template>
-	<div class="grid" :id="gid">
+	<div :id="gid" class="grid">
 		<shima-top-bar :url="url" />
 		<form class="grid__form">
 			<div class="grid__row grid__row--top">
@@ -10,20 +10,20 @@
 				</div>
 				<div class="grid__cell">
 					<p>Spacing</p>
-					<input class="grid__input grid__input--1" type="number" min="0" v-model.number="x.grid" :placeholder="y.grid" />
-					<input class="grid__input grid__input--1" type="number" min="0" v-model.number="y.grid" :placeholder="x.grid" />
+					<input v-model.number="x.grid" :placeholder="y.grid" class="grid__input grid__input--1" type="number" min="0" />
+					<input v-model.number="y.grid" :placeholder="x.grid" class="grid__input grid__input--1" type="number" min="0" />
 				</div>
 				<div class="grid__cell">
 					<p>Divisions</p>
-					<input class="grid__input grid__input--2" type="number" min="0" v-model.number="x.div" :placeholder="y.div" />
-					<input class="grid__input grid__input--2" type="number" min="0" v-model.number="y.div" :placeholder="x.div" />
+					<input v-model.number="x.div" :placeholder="y.div" class="grid__input grid__input--2" type="number" min="0" />
+					<input v-model.number="y.div" :placeholder="x.div" class="grid__input grid__input--2" type="number" min="0" />
 				</div>
 				<div class="grid__cell">
 					<p>Gutter</p>
-					<input class="grid__input grid__input--3" type="number" v-model.number="x.gutter" :placeholder="y.gutter" />
-					<input class="grid__input grid__input--3" type="number" v-model.number="y.gutter" :placeholder="x.gutter" />
+					<input v-model.number="x.gutter" :placeholder="y.gutter" class="grid__input grid__input--3" type="number" />
+					<input v-model.number="y.gutter" :placeholder="x.gutter" class="grid__input grid__input--3" type="number" />
 				</div>
-				<div class="grid__cell--break"></div>
+				<div class="grid__cell--break" />
 				<div class="grid__cell grid__cell--gutter grid__cell--first-gutter">
 					<p>Grid color</p>
 					<color-picker v-model="x.gridColor" />
@@ -41,13 +41,13 @@
 			</div>
 		</form>
 		<div class="grid__main">
-			<div class="grid__content" :style="style">
-				<slot></slot>
+			<div :style="style" class="grid__content">
+				<slot />
 			</div>
 		</div>
 		<div class="grid__code">
-			<shima-code type="css" :url="url" :top="gridOnTop">
-				<shima-checkbox class="grid__cb" v-model="gridOnTop">Grid on top</shima-checkbox>
+			<shima-code :url="url" :top="gridOnTop" type="css">
+				<shima-checkbox v-model="gridOnTop" class="grid__cb">Grid on top</shima-checkbox>
 			</shima-code>
 		</div>
 	</div>
@@ -219,12 +219,20 @@ import ShimaCode        from "./Code.vue";
 
 export default {
 
+	components: {
+		ColorPicker,
+		ShimaTopBar,
+		ShimaGridPicker,
+		ShimaCheckbox,
+		ShimaCode
+	},
+
 	props: {
-		xGrid     : { type: Number, default: 128 }, yGrid     : { type: Number },
-		xDiv      : { type: Number, default: 4   }, yDiv      : { type: Number },
-		xGutter   : { type: Number, default: 32  }, yGutter   : { type: Number },
-		xGridColor: { type: String, default: ""  }, yGridColor: { type: String },
-		xDivColor : { type: String, default: ""  }, yDivColor : { type: String },
+		xGrid     : { type: Number, default: 128 }, yGrid     : { type: Number, default: null },
+		xDiv      : { type: Number, default: 4   }, yDiv      : { type: Number, default: null },
+		xGutter   : { type: Number, default: 32  }, yGutter   : { type: Number, default: null },
+		xGridColor: { type: String, default: ""  }, yGridColor: { type: String, default: null },
+		xDivColor : { type: String, default: ""  }, yDivColor : { type: String, default: null },
 		t         : { type: String, default: "standard" },
 		bg        : { type: String, default: ""  }
 	},
@@ -251,12 +259,6 @@ export default {
 			type: this.t,
 			gridOnTop: false
 		};
-	},
-
-	watch: {
-		gridOnTop: function (newValue) {
-			newValue ? this.addGridOnTop(this.gUrl) : this.removeGridOnTop();
-		}
 	},
 
 	computed: {
@@ -304,12 +306,21 @@ export default {
 		}
 	},
 
-	components: {
-		ColorPicker,
-		ShimaTopBar,
-		ShimaGridPicker,
-		ShimaCheckbox,
-		ShimaCode
+	watch: {
+		gridOnTop: function (newValue) {
+			newValue ? this.addGridOnTop(this.gUrl) : this.removeGridOnTop();
+		}
+	},
+
+
+	// ### [Lifecycle] ######################################
+
+	mounted() {
+		this.setGridUrl = _.debounce(this.setGridUrl, 500, { leading: false, trailing: true });
+	},
+
+	beforeDestroy() {
+		this.removeGridOnTop();
 	},
 
 
@@ -352,17 +363,6 @@ export default {
 			const el = document.getElementById("style-" + this.gid);
 			el && el.parentNode.removeChild(el);
 		}
-	},
-
-
-	// ### [Lifecycle] ######################################
-
-	mounted() {
-		this.setGridUrl = _.debounce(this.setGridUrl, 500, { leading: false, trailing: true });
-	},
-
-	beforeDestroy() {
-		this.removeGridOnTop();
 	}
 
 };

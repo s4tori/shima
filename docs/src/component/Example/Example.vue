@@ -1,34 +1,34 @@
 <template>
 	<div>
-		<div :key="k" :id="'example-' + v" v-for="(v, k) in examples"></div>
+		<div v-for="(v, k) in examples" :key="k" :id="'example-' + v" />
 
 		<h2 id="examples">
 			<a href="#examples">▨ Examples <icon i="anchor" /></a>
 		</h2>
 
 		<div v-if="false">
-			<cube :key="i" :type="i-1"    v-for="i in 10" /><br />
-			<cube :key="i" :type="i-1+10" v-for="i in 10" /><br />
-			<cube :key="i" :type="i-1+20" v-for="i in 10" /><br />
+			<cube v-for="i in 10" :key="i" :type="i-1"    /><br />
+			<cube v-for="i in 10" :key="i" :type="i-1+10" /><br />
+			<cube v-for="i in 10" :key="i" :type="i-1+20" /><br />
 		</div>
 
 		<div class="legend">
 			<ul class="legend__list">
-				<link-example :cube="1" type="vr"        v-model="example">Vertical Rhythm</link-example>
-				<link-example :cube="2" type="layout"    v-model="example">Grid System</link-example>
-				<link-example :cube="7" type="vrgrid"    v-model="example">VR + Grid</link-example>
+				<link-example :cube="1" v-model="example" type="vr">Vertical Rhythm</link-example>
+				<link-example :cube="2" v-model="example" type="layout">Grid System</link-example>
+				<link-example :cube="7" v-model="example" type="vrgrid">VR + Grid</link-example>
 			</ul>
 
 			<ul class="legend__list">
-				<link-example :cube="23" type="bp"       v-model="example">Blue print</link-example>
-				<link-example :cube="0"  type="icon"     v-model="example">Icon</link-example>
-				<link-example :cube="10" type="iso"      v-model="example">Isometric grid</link-example>
+				<link-example :cube="23" v-model="example" type="bp">Blue print</link-example>
+				<link-example :cube="0"  v-model="example" type="icon">Icon</link-example>
+				<link-example :cube="10" v-model="example" type="iso">Isometric grid</link-example>
 			</ul>
 
 			<ul class="legend__list">
-				<link-example :cube="20" type="oblique"  v-model="example">Oblique grid</link-example>
-				<link-example :cube="18" type="stripe-r" v-model="example">Stripe (right)</link-example>
-				<link-example :cube="19" type="stripe-l" v-model="example">Stripe (left)</link-example>
+				<link-example :cube="20" v-model="example" type="oblique">Oblique grid</link-example>
+				<link-example :cube="18" v-model="example" type="stripe-r">Stripe (right)</link-example>
+				<link-example :cube="19" v-model="example" type="stripe-l">Stripe (left)</link-example>
 			</ul>
 		</div>
 
@@ -61,6 +61,13 @@ import Icon        from "src/component/Icon.vue";
 
 export default {
 
+	components: {
+		LinkExample,
+		GridExample,
+		Cube,
+		Icon
+	},
+
 	data() {
 		const examples = ["vr", "layout", "vrgrid", "bp", "icon", "iso", "oblique", "stripe-r", "stripe-l"];
 		const hash     = _.trimStart(window.location.hash, "#example-");
@@ -70,13 +77,6 @@ export default {
 			examples,
 			example
 		};
-	},
-
-	components: {
-		LinkExample,
-		GridExample,
-		Cube,
-		Icon
 	}
 
 };

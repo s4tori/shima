@@ -18,6 +18,19 @@ import StripeLeft     from "src/component/GridManagerExample/StripeLeft.vue";
 
 export default {
 
+	components: {
+		GridManager,
+		VerticalRhythm,
+		Blueprint,
+		Layout,
+		VRGrid,
+		Icon,
+		Iso,
+		Oblique,
+		StripeRight,
+		StripeLeft
+	},
+
 	props: {
 		type: { type: String, default: "vr" }
 	},
@@ -37,19 +50,6 @@ export default {
 				default        : return "GridManager";
 			}
 		}
-	},
-
-	components: {
-		GridManager,
-		VerticalRhythm,
-		Blueprint,
-		Layout,
-		VRGrid,
-		Icon,
-		Iso,
-		Oblique,
-		StripeRight,
-		StripeLeft
 	}
 
 };

@@ -9,8 +9,8 @@
 					<a href="#grid">▨ Create your grid <icon i="anchor" /></a>
 				</h2>
 				<shima-grid-manager
-					:xGrid="128" :xDiv="4" :xGutter="-32"
-					:yGrid="128" :yDiv="4" :yGutter="0"
+					:x-grid="128" :x-div="4" :x-gutter="-32"
+					:y-grid="128" :y-div="4" :y-gutter="0"
 				/>
 				<example-section />
 				<api-section />

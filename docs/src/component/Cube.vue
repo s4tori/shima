@@ -1,10 +1,10 @@
 <template>
-	<transition name="cube--fade" :duration="300">
-		<svg v-if="!goodBye" class="cube" :class="{'cube--logo': logo }" version="1.1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+	<transition :duration="300" name="cube--fade">
+		<svg v-if="!goodBye" :class="{'cube--logo': logo }" class="cube" version="1.1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
 			<g class="cube__transition">
 				<g v-if="logo">
 					<rect
-						class="cube__main" :style="eeStyle"
+						:style="eeStyle" class="cube__main"
 						x="0" y="0" width="32" height="32" rx="0" ry="0"
 						@mouseenter="updateCube" @mouseleave="updateCube" @click.prevent="deleteCube"
 					/>
@@ -14,23 +14,23 @@
 				</g>
 
 				<g :transform="gr ? 'rotate(45, 16, 16)' : null">
-					<rect v-if="d[0] === 1" class="cube__mini" :x="p[0].x" :y="p[0].y" width="4"  height="4" :transform="p[0].t" />
-					<rect v-if="d[1] === 1" class="cube__mini" :x="p[1].x" :y="p[1].y" width="4"  height="4" :transform="p[1].t" />
-					<rect v-if="d[2] === 1" class="cube__mini" :x="p[2].x" :y="p[2].y" width="4"  height="4" :transform="p[2].t" />
-					<rect v-if="d[3] === 1" class="cube__mini" :x="p[3].x" :y="p[3].y" width="4"  height="4" :transform="p[3].t" />
-					<rect v-if="d[4] === 1" class="cube__mini" :x="p[4].x" :y="p[4].y" width="4"  height="4" :transform="p[4].t" />
-					<rect v-if="d[5] === 1" class="cube__mini" :x="p[5].x" :y="p[5].y" width="4"  height="4" :transform="p[5].t" />
-					<rect v-if="d[6] === 1" class="cube__mini" :x="p[6].x" :y="p[6].y" width="4"  height="4" :transform="p[6].t" />
-					<rect v-if="d[7] === 1" class="cube__mini" :x="p[7].x" :y="p[7].y" width="4"  height="4" :transform="p[7].t" />
-					<rect v-if="d[8] === 1" class="cube__mini" :x="p[8].x" :y="p[8].y" width="4"  height="4" :transform="p[8].t" />
+					<rect v-if="d[0] === 1" :transform="p[0].t" :x="p[0].x" :y="p[0].y" width="4"  height="4" class="cube__mini" />
+					<rect v-if="d[1] === 1" :transform="p[1].t" :x="p[1].x" :y="p[1].y" width="4"  height="4" class="cube__mini" />
+					<rect v-if="d[2] === 1" :transform="p[2].t" :x="p[2].x" :y="p[2].y" width="4"  height="4" class="cube__mini" />
+					<rect v-if="d[3] === 1" :transform="p[3].t" :x="p[3].x" :y="p[3].y" width="4"  height="4" class="cube__mini" />
+					<rect v-if="d[4] === 1" :transform="p[4].t" :x="p[4].x" :y="p[4].y" width="4"  height="4" class="cube__mini" />
+					<rect v-if="d[5] === 1" :transform="p[5].t" :x="p[5].x" :y="p[5].y" width="4"  height="4" class="cube__mini" />
+					<rect v-if="d[6] === 1" :transform="p[6].t" :x="p[6].x" :y="p[6].y" width="4"  height="4" class="cube__mini" />
+					<rect v-if="d[7] === 1" :transform="p[7].t" :x="p[7].x" :y="p[7].y" width="4"  height="4" class="cube__mini" />
+					<rect v-if="d[8] === 1" :transform="p[8].t" :x="p[8].x" :y="p[8].y" width="4"  height="4" class="cube__mini" />
 
-					<rect v-if="d[0] === 2" class="cube__mini" :x="p[0].x" :y="p[0].y" :width="8 + 4 * 2"  height="4" />
-					<rect v-if="d[3] === 2" class="cube__mini" :x="p[3].x" :y="p[3].y" :width="8 + 4 * 2"  height="4" />
-					<rect v-if="d[6] === 2" class="cube__mini" :x="p[6].x" :y="p[6].y" :width="8 + 4 * 2"  height="4" />
+					<rect v-if="d[0] === 2" :x="p[0].x" :y="p[0].y" :width="8 + 4 * 2"  height="4" class="cube__mini" />
+					<rect v-if="d[3] === 2" :x="p[3].x" :y="p[3].y" :width="8 + 4 * 2"  height="4" class="cube__mini" />
+					<rect v-if="d[6] === 2" :x="p[6].x" :y="p[6].y" :width="8 + 4 * 2"  height="4" class="cube__mini" />
 
-					<rect v-if="d[0] === 3" class="cube__mini" :x="p[0].x" :y="p[0].y" width="4"  :height="8 + 4 * 2" />
-					<rect v-if="d[1] === 3" class="cube__mini" :x="p[1].x" :y="p[1].y" width="4"  :height="8 + 4 * 2" />
-					<rect v-if="d[2] === 3" class="cube__mini" :x="p[2].x" :y="p[2].y" width="4"  :height="8 + 4 * 2" />
+					<rect v-if="d[0] === 3" :height="8 + 4 * 2" :x="p[0].x" :y="p[0].y" width="4" class="cube__mini" />
+					<rect v-if="d[1] === 3" :height="8 + 4 * 2" :x="p[1].x" :y="p[1].y" width="4" class="cube__mini" />
+					<rect v-if="d[2] === 3" :height="8 + 4 * 2" :x="p[2].x" :y="p[2].y" width="4" class="cube__mini" />
 				</g>
 			</g>
 		</svg>
@@ -127,14 +127,6 @@ export default {
 		};
 	},
 
-	watch: {
-		ee: function (newValue, oldValue) {
-			if (newValue !== oldValue) {
-				this.goodBye = false;
-			}
-		}
-	},
-
 	computed: {
 		d() {
 			const type = this.t % this.layout.length;
@@ -188,6 +180,14 @@ export default {
 				fill: clr,
 				stroke: clr
 			};
+		}
+	},
+
+	watch: {
+		ee: function (newValue, oldValue) {
+			if (newValue !== oldValue) {
+				this.goodBye = false;
+			}
 		}
 	},
 

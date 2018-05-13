@@ -4,7 +4,7 @@
 			<a href="#welcome">▨ Getting Started <icon i="anchor" /></a>
 		</h2>
 
-		<wrapper class="welcome__content" :grid="grid" top>
+		<wrapper :grid="grid" class="welcome__content" top>
 			<h3 class="welcome__title">Hi!</h3>
 			<p>
 				Shima helps you to render custom lovely grids 💖.
@@ -21,7 +21,7 @@
 				Do you want to display a grid with gutters? Simply add a line of CSS and you're done:
 			</p>
 
-			<shima-code class="welcome__code" :url="`${base}128x4x32/128x4x0`">
+			<shima-code :url="`${base}128x4x32/128x4x0`" class="welcome__code">
 				<shima-checkbox v-model="grid" class="welcome__cb">Show grid</shima-checkbox>
 			</shima-code>
 		</wrapper>
@@ -92,18 +92,18 @@ import Icon             from "src/component/Icon.vue";
 
 export default {
 
-	data() {
-		return {
-			base: getEnvConfig("urlGrid"),
-			grid: false
-		};
-	},
-
 	components: {
 		Wrapper,
 		ShimaCheckbox,
 		ShimaCode,
 		Icon
+	},
+
+	data() {
+		return {
+			base: getEnvConfig("urlGrid"),
+			grid: false
+		};
 	}
 
 };

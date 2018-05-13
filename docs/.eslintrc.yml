@@ -6,7 +6,6 @@ env:
 
 plugins:
     - vue
-    #- html
 
 extends:
     - plugin:vue/recommended
@@ -73,3 +72,7 @@ rules:
     valid-typeof: ["error", { requireStringLiterals: true }]
 
     vue/jsx-uses-vars: "error"
+    vue/html-indent: ["error", "tab"]
+    vue/max-attributes-per-line: "off"
+    vue/html-self-closing: ["error", { "html": { "void": "always", "normal": "always", "component": "always" }, "svg": "always", "math": "always"}]
+    vue/no-multi-spaces: "off"

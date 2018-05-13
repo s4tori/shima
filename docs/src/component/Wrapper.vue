@@ -1,8 +1,8 @@
 <template>
-	<div class="wrapper" :class="{ 'wrapper__gutter': gutter }">
+	<div :class="{ 'wrapper__gutter': gutter }" class="wrapper">
 		<div :class="{ 'wrapper__page': page }">
-			<div v-if="grid" class="wrapper__grid" :class="{ 'wrapper__grid--dark': dark, 'wrapper__grid--top': top }"><slot></slot></div>
-			<slot v-else></slot>
+			<div v-if="grid" :class="{ 'wrapper__grid--dark': dark, 'wrapper__grid--top': top }" class="wrapper__grid"><slot /></div>
+			<slot v-else />
 		</div>
 	</div>
 </template>
@@ -53,11 +53,11 @@
 export default {
 
 	props: {
-		page: Boolean,
-		gutter: Boolean,
-		grid: Boolean,
-		dark: Boolean,
-		top : Boolean
+		page  : { type: Boolean, default: false },
+		gutter: { type: Boolean, default: false },
+		grid  : { type: Boolean, default: false },
+		dark  : { type: Boolean, default: false },
+		top   : { type: Boolean, default: false }
 	}
 
 };

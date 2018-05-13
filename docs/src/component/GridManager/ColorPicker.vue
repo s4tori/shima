@@ -1,15 +1,15 @@
 <template>
 	<div class="shima-cp">
 		<input
+			:style="'background-color: ' + rtColor"
 			class="shima-cp__input"
 			readonly type="text"
 			@focus="showPicker"
-			:style="'background-color: ' + this.rtColor"
 		/>
 		<sketch-picker
-			class="shima-cp__picker"
 			v-if="displayPicker"
 			:value="colors"
+			class="shima-cp__picker"
 			@input="updateValueFromPicker"
 		/>
 	</div>
@@ -55,6 +55,10 @@ import { _ }      from "src/util";
 
 export default {
 
+	components: {
+		"sketch-picker": Sketch
+	},
+
 	// https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
 	// We use "v-model=" instead of ":color.sync="
 	model: {
@@ -83,10 +87,6 @@ export default {
 		rtColor() {
 			return this.getValidColor(this.colors);
 		}
-	},
-
-	components: {
-		"sketch-picker": Sketch
 	},
 
 

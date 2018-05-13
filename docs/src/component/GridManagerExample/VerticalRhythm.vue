@@ -1,8 +1,8 @@
 <template>
 	<div class="grid-example">
 		<shima-grid-manager
-			:xGrid="0"  :xDiv="0" :xGutter="0"
-			:yGrid="32" :yDiv="0" :yGutter="0"
+			:x-grid="0"  :x-div="0" :x-gutter="0"
+			:y-grid="32" :y-div="0" :y-gutter="0"
 		>
 			<div class="grid-example__content">
 				<h1>Vertical Rhythm</h1>

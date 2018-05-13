@@ -1,7 +1,7 @@
 <template>
 	<div class="gex-bp">
 		<shima-grid-manager
-			:xGrid="128" :xDiv="4" :xGutter="-32"
+			:x-grid="128" :x-div="4" :x-gutter="-32"
 		>
 			<div class="gex-bp__icons">
 				<icon i="beaker" class="gex-bp__icon" />

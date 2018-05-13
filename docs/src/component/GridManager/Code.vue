@@ -4,7 +4,7 @@
 			<div v-if="type === 'css' && !top">
 				<span class="token selector">.myAwesomeDiv</span> {<br />
 				<span class="token property">background-image</span>:
-				<span class="token value">url(<span class="token url">"{{url}}"</span>)</span>;<br />
+				<span class="token value">url(<span class="token url">"{{ url }}"</span>)</span>;<br />
 				}
 			</div>
 			<div v-else-if="type === 'css' && top">
@@ -14,18 +14,18 @@
 				<span class="token selector">.myAwesomeDiv::after</span> {<br />
 				<template v-for="(item, index) in cssTop">
 					<span :key="index">
-						<span class="token property">{{ item.key }}</span>: <span class="token" :class="item.type">{{ item.value }}</span>;
+						<span class="token property">{{ item.key }}</span>: <span :class="item.type" class="token">{{ item.value }}</span>;
 						<br />
 					</span>
 				</template>
 				<span class="token property">background-image</span>:
-				<span class="token value">url(<span class="token url">"{{url}}"</span>)</span>;<br />
+				<span class="token value">url(<span class="token url">"{{ url }}"</span>)</span>;<br />
 				}
 			</div>
 			<div v-else-if="type === 'stylus'">
 				<span class="token selector">.foo</span><br />
 				<span class="token property">background-image</span>
-				<span class="token value">url(<span class="token url">"{{url}}"</span>)</span><br />
+				<span class="token value">url(<span class="token url">"{{ url }}"</span>)</span><br />
 			</div>
 		</code>
 		<slot />

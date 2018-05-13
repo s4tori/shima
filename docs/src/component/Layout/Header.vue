@@ -4,7 +4,7 @@
 			<a class="header__content" href="">
 				<div class="header__logo">
 					<h1 class="header__title">Shima</h1>
-					<logo class="header__svg" :toggle-ee="ee" />
+					<logo :toggle-ee="ee" class="header__svg" />
 				</div>
 				<div class="header__text">
 					<h2 class="header__jp" @click.prevent="ee = !ee">縞</h2>
@@ -106,15 +106,15 @@ import Logo    from "./Logo.vue";
 
 export default {
 
+	components: {
+		Wrapper,
+		Logo
+	},
+
 	data() {
 		return {
 			ee: false
 		};
-	},
-
-	components: {
-		Wrapper,
-		Logo
 	}
 
 };

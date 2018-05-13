@@ -1,10 +1,10 @@
 <template>
 	<li
-		class="example-item" :class="{ 'example-item--active': curr === type }"
+		:class="{ 'example-item--active': curr === type }" class="example-item"
 		@click="setExample"
 	>
-		<a class="example-item__link" :href="'#example-' + type">
-			<cube class="example-item__cube" :type="cube" /><slot></slot>
+		<a :href="'#example-' + type" class="example-item__link">
+			<cube :type="cube" class="example-item__cube" /><slot />
 		</a>
 	</li>
 </template>
@@ -55,6 +55,10 @@ import Cube from "src/component/Cube.vue";
 
 export default {
 
+	components: {
+		Cube
+	},
+
 	model: {
 		prop: "curr",
 		event: "input"
@@ -64,10 +68,6 @@ export default {
 		curr: { type: String, default: "vr" },
 		type: { type: String, default: "vr" },
 		cube: { type: Number, default: 0    }
-	},
-
-	components: {
-		Cube
 	},
 
 	methods: {

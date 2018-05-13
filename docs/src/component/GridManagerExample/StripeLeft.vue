@@ -1,11 +1,10 @@
 <template>
 	<div>
 		<shima-grid-manager
-			:xGrid="0"  :xDiv="0" :xGutter="0"
-			:yGrid="30" :yDiv="0" :yGutter="0"
+			:x-grid="0"  :x-div="0" :x-gutter="0"
+			:y-grid="30" :y-div="0" :y-gutter="0"
 			t="oblique"
-		>
-		</shima-grid-manager>
+		/>
 	</div>
 </template>
 <script>

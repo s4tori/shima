@@ -1,8 +1,8 @@
 <template>
 	<div class="gex-layout">
 		<shima-grid-manager
-			:xGrid="128" :xDiv="4" :xGutter="32"
-			:yGrid="0"   :yDiv="0" :yGutter="0"
+			:x-grid="128" :x-div="4" :x-gutter="32"
+			:y-grid="0"   :y-div="0" :y-gutter="0"
 		>
 			<div class="gex-layout__content">
 				<div class="gex-layout__row">

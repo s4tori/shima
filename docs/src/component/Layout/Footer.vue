@@ -1,6 +1,6 @@
 <template>
 	<footer class="footer">
-		<logo class="footer__logo" :toggle-ee="ee" />
+		<logo :toggle-ee="ee" class="footer__logo" />
 		<p class="footer__about">
 			<span>
 				<span>&lt;/&gt;</span>
@@ -71,6 +71,11 @@ import { getEnvConfig } from "src/util";
 
 export default {
 
+	components: {
+		Logo,
+		Icon
+	},
+
 	data: function () {
 		return {
 			pid: "pattern-footer-",
@@ -79,11 +84,6 @@ export default {
 			ee: false,
 			urlSource: getEnvConfig("urlSource")
 		};
-	},
-
-	components: {
-		Logo,
-		Icon
 	}
 
 };

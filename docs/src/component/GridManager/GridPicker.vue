@@ -3,7 +3,7 @@
 		<div class="shima-gp__input" @click="updateValue">
 			<svg class="shima-gp__svg" version="1.1" xmlns="http://www.w3.org/2000/svg">
 				<defs>
-					<pattern :id="pid" x="0" y="0" :width="w" :height="h" patternUnits="userSpaceOnUse" :patternTransform="pt">
+					<pattern :id="pid" :patternTransform="pt" :width="w" :height="h" x="0" y="0" patternUnits="userSpaceOnUse">
 						<g transform="translate(0.5, 0.5)">
 							<path :d="`M 0 0 L ${w} 0 M 0 0 L 0 ${h}`" />
 						</g>

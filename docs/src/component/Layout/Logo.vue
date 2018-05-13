@@ -1,81 +1,81 @@
 <template>
 	<div class="logo">
-		<svg class="logo__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" :viewBox="`0 0 ${(xGrid+xGutter) * 5 - 3 * w} ${yGrid}`">
+		<svg :viewBox="`0 0 ${(xGrid+xGutter) * 5 - 3 * w} ${yGrid}`" class="logo__svg" version="1.1" xmlns="http://www.w3.org/2000/svg">
 			<g :transform="`translate(0,0)`">
-				<cube logo  x="0"   y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w"   y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w2"  y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3"  y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo  x="0"  :y="h"  :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="0"  :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w"  :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w2" :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0"  :y="h"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				<g :transform="offset">
-					<cube logo  x="0"  :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w"  :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w2" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
+					<cube :x="0"  :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w"  :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w2" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				</g>
-				<cube logo :x="w3" :y="h3" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo  x="0"  :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w"  :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w2" :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="w3" :y="h3" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0"  :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w"  :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w2" :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 			</g>
 
 			<g :transform="`translate(${(xGrid+xGutter) * 1},0)`">
-				<cube logo x="0"   y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo x="0"  :y="h"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo x="0"  :y="h3" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo x="0"  :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="0"  :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0"  :y="h"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0"  :y="h3" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0"  :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				<g :transform="offset">
-					<cube logo  x="0"  :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w"  :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w2" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
+					<cube :x="0"  :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w"  :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w2" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				</g>
-				<cube logo :x="w3"  y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h3" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="w3" :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h3" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 			</g>
 
 			<g :transform="`translate(${(xGrid+xGutter) * 2},0)`">
-				<cube logo :x="0 ":y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="0" :y="h1" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="0" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="0" :y="h3" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="0" :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="0" :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h1" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h3" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 			</g>
 
 			<g :transform="`translate(${(xGrid+xGutter) * 3 - 3 * w},0)`">
-				<cube logo x="0"  y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo x="0" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo x="0" :y="h3" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo x="0" :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="0" :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h3" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				<g :transform="offset">
-					<cube logo x="0"   :y="h"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w"  :y="h"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w2" :y="h"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w"  :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
+					<cube :x="0"  :y="h"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w"  :y="h"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w2" :y="h"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w"  :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				</g>
-				<cube logo :x="w3"  y="0"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h3" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="w3" :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h3" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 			</g>
 
 			<g :transform="`translate(${(xGrid+xGutter) * 4 - 3 * w},0)`">
-				<cube logo  x="0" :y="h"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo  x="0" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo  x="0" :y="h3" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo  x="0" :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="0" :y="h"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h3" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="0" :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				<g :transform="offset">
-					<cube logo  x="0"  y="0" :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w1" y="0" :width="w" :height="h" :ee="ee" @deleted="inc" />
-					<cube logo :x="w2" y="0" :width="w" :height="h" :ee="ee" @deleted="inc" />
+					<cube :x="0"  :y="0" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w1" :y="0" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+					<cube :x="w2" :y="0" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				</g>
-				<cube logo :x="w3" :y="h"  :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h3" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w3" :y="h4" :width="w" :height="h" :ee="ee" @deleted="inc" />
-				<cube logo :x="w2" :y="h2" :width="w" :height="h" :ee="ee" @deleted="inc" />
+				<cube :x="w3" :y="h"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h3" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w3" :y="h4" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
+				<cube :x="w2" :y="h2" :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 			</g>
 		</svg>
 	</div>
@@ -142,6 +142,10 @@ import Cube from "src/component/Cube.vue";
 
 export default {
 
+	components: {
+		Cube
+	},
+
 	props: {
 		toggleEe: { type: Boolean, default: false }
 	},
@@ -171,10 +175,6 @@ export default {
 		toggleEe: function () {
 			this.ee = !this.ee;
 		}
-	},
-
-	components: {
-		Cube
 	},
 
 	methods: {

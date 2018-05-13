@@ -1,6 +1,6 @@
 <template>
 	<div class="block-url">
-		<template v-if="url">{{base}}</template>
+		<template v-if="url">{{ base }}</template>
 		<slot />
 	</div>
 </template>

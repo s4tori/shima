@@ -1,8 +1,8 @@
 <template>
-	<div>
+	<div class="gex-vrgrid">
 		<shima-grid-manager
-			:xGrid="128" :xDiv="4" :xGutter="-32"
-			:yGrid="128" :yDiv="4" :yGutter="0"
+			:x-grid="128" :x-div="4" :x-gutter="-32"
+			:y-grid="128" :y-div="4" :y-gutter="0"
 		>
 			<div class="gex-vrgrid__content">
 				<h1>VR + Grid</h1>
@@ -63,7 +63,8 @@
 		margin-right $base-spacing
 		text-align justify
 
-	h2&__title
+	// To override ".main h2"
+	& h2&__title
 		background none
 		color inherit
 

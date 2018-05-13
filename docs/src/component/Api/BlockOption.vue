@@ -1,6 +1,6 @@
 <template>
 	<li class="block-option">
-		<code>{{title}}</code>
+		<code>{{ title }}</code>
 		<slot />
 	</li>
 </template>

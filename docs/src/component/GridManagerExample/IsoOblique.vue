@@ -1,41 +1,41 @@
 <template>
 	<div class="gex-isobl">
 		<shima-grid-manager
-			:xGrid="xGrid" :xDiv="xDiv" :xGutter="xGutter"
-			:yGrid="yGrid" :yDiv="yDiv" :yGutter="yGutter"
+			:x-grid="xGrid" :x-div="xDiv" :x-gutter="xGutter"
+			:y-grid="yGrid" :y-div="yDiv" :y-gutter="yGutter"
 			:t="type"
 		>
 			<svg class="gex-isobl__svg" version="1.1" xmlns="http://www.w3.org/2000/svg">
 				<g :transform="transform">
 					<g :transform="`translate(${(xGrid+xGutter) * 2},${-(xGrid+yGutter) * 1})`">
-						<rect  x="0"   y="0"  :width="w" :height="h" class="gex-layer1" />
-						<rect :x="w"   y="0"  :width="w" :height="h" class="gex-layer1" />
-						<rect :x="w2"  y="0"  :width="w" :height="h" class="gex-layer1" />
-						<rect :x="w3"  y="0"  :width="w" :height="h" class="gex-layer1" />
-						<rect  x="0"  :y="h"  :width="w" :height="h" class="gex-layer2" />
+						<rect :x="0"  :y="0"  :width="w" :height="h" class="gex-layer1" />
+						<rect :x="w"  :y="0"  :width="w" :height="h" class="gex-layer1" />
+						<rect :x="w2" :y="0"  :width="w" :height="h" class="gex-layer1" />
+						<rect :x="w3" :y="0"  :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0"  :y="h"  :width="w" :height="h" class="gex-layer2" />
 						<g :transform="offset">
-							<rect  x="0"  :y="h2" :width="w" :height="h" class="gex-layer3" />
+							<rect :x="0"  :y="h2" :width="w" :height="h" class="gex-layer3" />
 							<rect :x="w"  :y="h2" :width="w" :height="h" class="gex-layer3" />
 							<rect :x="w2" :y="h2" :width="w" :height="h" class="gex-layer3" />
 						</g>
 						<rect :x="w3" :y="h3" :width="w" :height="h" class="gex-layer2" />
-						<rect  x="0"  :y="h4" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0"  :y="h4" :width="w" :height="h" class="gex-layer1" />
 						<rect :x="w"  :y="h4" :width="w" :height="h" class="gex-layer1" />
 						<rect :x="w2" :y="h4" :width="w" :height="h" class="gex-layer1" />
 						<rect :x="w3" :y="h4" :width="w" :height="h" class="gex-layer1" />
 					</g>
 
 					<g :transform="`translate(${(xGrid+xGutter) * 3},${-(xGrid+yGutter) * 1})`">
-						<rect x="0"   y="0"  :width="w" :height="h" class="gex-layer1" />
-						<rect x="0"  :y="h"  :width="w" :height="h" class="gex-layer1" />
-						<rect x="0"  :y="h3" :width="w" :height="h" class="gex-layer1" />
-						<rect x="0"  :y="h4" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0"  :y="0"  :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0"  :y="h"  :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0"  :y="h3" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0"  :y="h4" :width="w" :height="h" class="gex-layer1" />
 						<g :transform="offset">
-							<rect  x="0"  :y="h2" :width="w" :height="h" class="gex-layer3" />
+							<rect :x="0"  :y="h2" :width="w" :height="h" class="gex-layer3" />
 							<rect :x="w"  :y="h2" :width="w" :height="h" class="gex-layer3" />
 							<rect :x="w2" :y="h2" :width="w" :height="h" class="gex-layer3" />
 						</g>
-						<rect :x="w3"  y="0"  :width="w" :height="h" class="gex-layer2" />
+						<rect :x="w3" :y="0"  :width="w" :height="h" class="gex-layer2" />
 						<rect :x="w3" :y="h"  :width="w" :height="h" class="gex-layer2" />
 						<rect :x="w3" :y="h3" :width="w" :height="h" class="gex-layer2" />
 						<rect :x="w3" :y="h4" :width="w" :height="h" class="gex-layer2" />
@@ -49,32 +49,32 @@
 					</g>
 
 					<g :transform="`translate(${(xGrid+xGutter) * 4},${-(xGrid+yGutter) * 2})`">
-						<rect x="0"  y="0"  :width="w" :height="h" class="gex-layer1" />
-						<rect x="0" :y="h2" :width="w" :height="h" class="gex-layer1" />
-						<rect x="0" :y="h3" :width="w" :height="h" class="gex-layer1" />
-						<rect x="0" :y="h4" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0" :y="0"  :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0" :y="h2" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0" :y="h3" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0" :y="h4" :width="w" :height="h" class="gex-layer1" />
 						<g :transform="offset">
-							<rect x="0"   :y="h"  :width="w" :height="h" class="gex-layer3" />
+							<rect :x="0"  :y="h"  :width="w" :height="h" class="gex-layer3" />
 							<rect :x="w"  :y="h"  :width="w" :height="h" class="gex-layer3" />
 							<rect :x="w2" :y="h"  :width="w" :height="h" class="gex-layer3" />
 							<rect :x="w"  :y="h2" :width="w" :height="h" class="gex-layer3" />
 						</g>
-						<rect :x="w3"  y="0"  :width="w" :height="h" class="gex-layer2" />
+						<rect :x="w3" :y="0"  :width="w" :height="h" class="gex-layer2" />
 						<rect :x="w3" :y="h2" :width="w" :height="h" class="gex-layer2" />
 						<rect :x="w3" :y="h3" :width="w" :height="h" class="gex-layer2" />
 						<rect :x="w3" :y="h4" :width="w" :height="h" class="gex-layer2" />
 					</g>
 
 					<g :transform="`translate(${(xGrid+xGutter) * 4},-${(xGrid+yGutter) * 3})`">
-						<rect  x="0" :y="h"  :width="w" :height="h" class="gex-layer1" />
-						<rect  x="0" :y="h2" :width="w" :height="h" class="gex-layer1" />
-						<rect  x="0" :y="h3" :width="w" :height="h" class="gex-layer1" />
-						<rect  x="0" :y="h4" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0" :y="h"  :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0" :y="h2" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0" :y="h3" :width="w" :height="h" class="gex-layer1" />
+						<rect :x="0" :y="h4" :width="w" :height="h" class="gex-layer1" />
 						<rect :x="w" :y="h2" :width="w" :height="h" class="gex-layer1" />
 						<g :transform="offset">
-							<rect  x="0"  y="0" :width="w" :height="h" class="gex-layer3" />
-							<rect :x="w1" y="0" :width="w" :height="h" class="gex-layer3" />
-							<rect :x="w2" y="0" :width="w" :height="h" class="gex-layer3" />
+							<rect :x="0"  :y="0" :width="w" :height="h" class="gex-layer3" />
+							<rect :x="w1" :y="0" :width="w" :height="h" class="gex-layer3" />
+							<rect :x="w2" :y="0" :width="w" :height="h" class="gex-layer3" />
 						</g>
 						<rect :x="w3" :y="h"  :width="w" :height="h" class="gex-layer2" />
 						<rect :x="w3" :y="h2" :width="w" :height="h" class="gex-layer2" />
@@ -119,6 +119,10 @@ import ShimaGridManager from "src/component/GridManager/GridManager.vue";
 
 export default {
 
+	components: {
+		ShimaGridManager
+	},
+
 	props: {
 		type: { type: String, default: "isometric", validator: (value) => _.includes(["isometric", "oblique"], value) }
 	},
@@ -144,10 +148,6 @@ export default {
 				: "matrix(1,1.000,-1.000,1,0,0) scale(0.707,0.707)"
 			;
 		}
-	},
-
-	components: {
-		ShimaGridManager
 	}
 
 };
