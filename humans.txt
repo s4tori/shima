@@ -1,0 +1,9 @@
+/* TEAM */
+	Ninja JS: 547021
+	From: France
+
+/* SITE */
+	Language: English
+	Standards: ES6, Go, HTML5, Javascript, Node.js, Stylus, SVG, Vue.js
+	Components: Babel, Koa, ESLint, Prerender, Vue.js, Webpack
+	Software: Affinity Designer, Atom, Photoshop, Postman
