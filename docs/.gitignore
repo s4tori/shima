@@ -3,6 +3,7 @@
 
 node_modules
 npm-debug.log*
+.pnpm-debug.log*
 
 
 ####################
@@ -27,7 +28,6 @@ res/
 # IDE
 
 .idea
-*.iml
 
 
 ####################
