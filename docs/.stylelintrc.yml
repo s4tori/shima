@@ -1,0 +1,12 @@
+extends:
+    - stylelint-plugin-stylus/standard
+    - stylelint-config-recess-order
+
+rules:
+    stylus/color-hex-case: "upper"
+    stylus/declaration-colon: null
+    stylus/indentation: "tab" # https://github.com/ota-meshi/stylelint-plugin-stylus/issues/91
+    stylus/property-no-unknown: [true, { ignoreProperties: ["/^shima-/"] }]
+    stylus/selector-list-comma: "always"
+    stylus/selector-list-comma-newline-after: "never"
+    stylus/single-line-comment-double-slash-space-after: null

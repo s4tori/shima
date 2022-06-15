@@ -1,6 +1,6 @@
 const path              = require("path");
 const webpack           = require("webpack");
-const WebpackConfig     = require("webpack-config").default;
+const { merge }         = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const define            = require("./util/webpack.define");
 const loaderOptions     = require("./util/webpack.loaders").getloaders("development");
@@ -8,13 +8,34 @@ const webConf           = require("../config")("development");
 const dir               = require("../dir");
 
 
-module.exports = new WebpackConfig().extend("./config/webpack/webpack.config.base.js").merge({
+module.exports = merge(require("./webpack.config.base"), {
 
 	mode: "development",
+	devtool: "eval-source-map",
+
+	devServer: {
+		compress: true,
+		port: webConf.server.port,
+		open: webConf.devServer.open,
+		historyApiFallback: true,
+		hot: true,
+		// parent index.html
+		// see: https://github.com/webpack/webpack-dev-server/issues/4231
+		devMiddleware: {
+			publicPath: "auto",
+			writeToDisk: false
+		},
+		host: process.env.HOST || "localhost",
+		client: {
+			logging: "none",
+			overlay: true
+		}
+	},
 
 	module: {
 		rules: [
-			{ test: /\.styl/, include: [dir.app], use: ["vue-style-loader",
+			{ test: /\.styl/, include: [dir.app], use: [
+				"vue-style-loader",
 				loaderOptions.css({ modules: false, importLoaders: 2 }),
 				loaderOptions.postCss(),
 				loaderOptions.stylus(),
@@ -28,8 +49,9 @@ module.exports = new WebpackConfig().extend("./config/webpack/webpack.config.bas
 		})),
 
 		// HMR
-		new webpack.WatchIgnorePlugin([path.resolve(__dirname, "./../../node_modules/")]),
-		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.WatchIgnorePlugin({
+			paths: [path.resolve(__dirname, "./../../node_modules/")]
+		}),
 
 		new HtmlWebpackPlugin({
 			template: path.resolve(dir.app, "./index.ejs"),
@@ -38,11 +60,6 @@ module.exports = new WebpackConfig().extend("./config/webpack/webpack.config.bas
 				base: webConf.client.base
 			}
 		})
-	],
-
-	// Performance options: disable warnings ([HMR] asset size limit)
-	performance: { hints: false },
-
-	devtool: "#cheap-module-source-map"
+	]
 
 });

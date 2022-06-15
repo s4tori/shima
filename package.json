@@ -1,18 +1,16 @@
 {
 	"name": "shima",
-	"version": "0.1.0",
-	"description": "CSS Grid Overlay",
+	"version": "0.2.0",
+	"description": "Shima | CSS Grid Overlay",
 	"homepage": "https://shima-grid.com/",
 	"license": "MIT",
+	"author": "s4tori",
 	"keywords": [
 		"grid",
 		"css",
 		"web-design",
 		"web-development",
 		"vertical-rhythm"
-	],
-	"author": [
-		"s4tori <s4tori.rn@gmail.com>"
 	],
 	"repository": {
 		"type": "git",

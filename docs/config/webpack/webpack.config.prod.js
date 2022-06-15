@@ -1,24 +1,35 @@
-const path                 = require("path");
-const chalk                = require("chalk");
-const webpack              = require("webpack");
-const WebpackConfig        = require("webpack-config").default;
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptCSSAssetsPlugin   = require("optimize-css-assets-webpack-plugin");
-const ProgressBarPlugin    = require("progress-bar-webpack-plugin");
-const HtmlWebpackPlugin    = require("html-webpack-plugin");
-const PrerenderSpaPlugin   = require("prerender-spa-plugin");
-const define               = require("./util/webpack.define");
-const loaderOptions        = require("./util/webpack.loaders").getloaders("production");
-const webConf              = require("../config")("production");
-const dir                  = require("../dir");
+const path                   = require("path");
+const CssMinimizerPlugin     = require("css-minimizer-webpack-plugin");
+const HtmlWebpackPlugin      = require("html-webpack-plugin");
+const MiniCssExtractPlugin   = require("mini-css-extract-plugin");
+const { isMinimal }          = require("std-env");
+const TerserPlugin           = require("terser-webpack-plugin");
+const webpack                = require("webpack");
+const { mergeWithCustomize } = require("webpack-merge");
+const { customizeObject }    = require("webpack-merge");
+const WebpackBar             = require("webpackbar");
+const define                 = require("./util/webpack.define");
+const loaderOptions          = require("./util/webpack.loaders").getloaders("production");
+const HtmlSsgPlugin          = require("./util/webpack.ssg.plugin");
+const webConf                = require("../config")("production");
+const dir                    = require("../dir");
 
 
-module.exports = new WebpackConfig().extend("./config/webpack/webpack.config.base.js").merge({
+const mergeStrategy = mergeWithCustomize({
+	customizeObject: customizeObject({ "entry": "prepend" }),
+});
+
+module.exports = mergeStrategy(require("./webpack.config.base"), {
 
 	mode: "production",
 
+	// HtmlSsgPlugin: server side rendering
+	entry: {
+		ssg: "./src/entry-ssg.js"
+	},
+
 	output: {
-		filename: "[name]-[chunkhash:6].js"
+		filename: "[name]-[contenthash:6].js"
 	},
 
 	module: {
@@ -37,13 +48,12 @@ module.exports = new WebpackConfig().extend("./config/webpack/webpack.config.bas
 			env: "production"
 		})),
 
-		// CSS
 		new MiniCssExtractPlugin({ filename: "style-[contenthash:6].css" }),
-		new OptCSSAssetsPlugin({ }),
 
 		new HtmlWebpackPlugin({
 			template: path.resolve(dir.app, "./index.ejs"),
 			filename: "../index.html",
+			excludeChunks: ["ssg"],
 			minify: {
 				removeComments: true,
 				collapseWhitespace: true
@@ -53,47 +63,43 @@ module.exports = new WebpackConfig().extend("./config/webpack/webpack.config.bas
 			}
 		}),
 
-		new PrerenderSpaPlugin(
-			dir.dist,
-			["/"]
-		),
+		// Small plugin to handle Static Site Generation
+		new HtmlSsgPlugin(),
 
-		new ProgressBarPlugin({
-			clear: true,
-			summary: false,
-			format: `${chalk.green.gray("[build]")} [:bar] ${chalk.green.bold(":percent")} | :msg`,
-			customSummary: ((bTime) => console.log("Build completed in", bTime))  // eslint-disable-line no-console
+		new WebpackBar({
+			reporters: isMinimal ? ["basic"] : ["fancy", "profile"],
+			profile: true
 		})
 	],
 
+	stats: {
+		modules: false
+	},
+
 	// Performance options
-	// https://webpack.js.org/configuration/performance/#performance-maxentrypointsize
+	// https://webpack.js.org/configuration/performance/#performancemaxentrypointsize
 	performance: {
 		maxEntrypointSize: 500000
 	},
 
-	// "splitChunks" doesn't work very well with vue-loader yet
-	// https://github.com/webpack-contrib/mini-css-extract-plugin/issues/113
-	// https://github.com/webpack-contrib/mini-css-extract-plugin/issues/85
 	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				default: false,
-				styles: {
-					name: "styles",
-					test: /\.(css|styl)$/,
-					chunks: "all",
-					//enforce: true
-				},
-				commons: {
-					test: /[\\/]node_modules[\\/]/,
-					name: "vendor",
-					priority: -10,
-					chunks: "initial"
-				}
-			}
-		},
-		minimize: true
-	}
+		minimizer: [
+			new CssMinimizerPlugin(),
+			new TerserPlugin({ extractComments: false })
+		],
 
+		splitChunks: {
+			// chunks: "all",
+			chunks(chunk) {
+				return chunk.name !== "ssg";
+			},
+			// https://stackoverflow.com/q/66986664
+			// Keep default configuration for "default" and "defaultVendors" cache groups
+			name: (module, chunks, cacheGroupKey) => {
+				const allChunksNames = chunks.map((chunk) => chunk.name).join("~");
+				const prefix = cacheGroupKey === "defaultVendors" ? "vendors" : cacheGroupKey;
+				return `${prefix}~${allChunksNames}`;
+			}
+		}
+	}
 });

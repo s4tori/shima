@@ -1,8 +1,8 @@
-const path                = require("path");
-const CleanWebpackPlugin  = require("clean-webpack-plugin");
-const CopyWebpackPlugin   = require("copy-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader");
-const dir                 = require("../dir");
+const path                   = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyWebpackPlugin      = require("copy-webpack-plugin");
+const { VueLoaderPlugin }    = require("vue-loader");
+const dir                    = require("../dir");
 
 
 module.exports = {
@@ -10,14 +10,14 @@ module.exports = {
 	name: "client",
 	context: dir.root,
 
-	entry: [
-		"./src/client-entry.js"
-	],
+	entry: {
+		main: "./src/entry-client.js"
+	},
 
 	output: {
 		filename: "client.js",
 		path: dir.dist + "/assets/",
-		publicPath: "assets/"
+		publicPath: "auto"
 	},
 
 	resolve: {
@@ -34,18 +34,32 @@ module.exports = {
 	plugins: [
 		new VueLoaderPlugin(),
 
-		new CleanWebpackPlugin(["index.html", "humans.txt", "assets/**/*.*"], {
-			root: dir.dist,
+		new CleanWebpackPlugin({
+			cleanOnceBeforeBuildPatterns: [
+				"**/*",
+				path.resolve(dir.dist, "index.html"),
+				path.resolve(dir.dist, "humans.txt")
+			],
 			dry: false,
 			verbose: false
 		}),
 
-		new CopyWebpackPlugin([
-			{ from: path.resolve(dir.stat, "humans.txt")       , to : dir.dist },
-			{ from: path.resolve(dir.css , "img/favicon/*.ico"), to : dir.dist, flatten: true },
-			{ from: path.resolve(dir.css , "img/favicon/*.png"), to : path.resolve(dir.dist, "assets/image/favicon"), flatten: true },
-			{ from: path.resolve(dir.stat, "og-image.png")     , to : path.resolve(dir.dist, "assets/image"), flatten: true }
-		])
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: path.resolve(dir.stat, "humans.txt"),
+					to : dir.dist
+				},
+				{
+					from: path.resolve(dir.stat, "og-image.png"),
+					to : path.resolve(dir.dist, "assets/image/[name][ext]") // Flatten copy
+				},
+				{
+					from: path.resolve(dir.css , "img/favicon/*.png").replace(/\\/g, "/"),
+					to : path.resolve(dir.dist, "assets/image/favicon/[name][ext]")
+				}
+			]
+		})
 	]
 
 };
