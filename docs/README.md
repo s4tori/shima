@@ -1,18 +1,32 @@
 <div align="center">
 	<h1>Shima documentation</h1>
-	<p>View the documentation and demo here:<br /> https://shima-grid.com/</p>
+	<p>The documentation with practical examples is available online:<br /> https://shima-grid.com</p>
 </div>
 
 
-## Installation
+<h2 align="center">🚀 Getting started</h2>
+
+### Prerequisites
+
+Install:
+* [Node.js](https://nodejs.org/) (16.15.1 LTS or higher)
+
+### Linux / Mac / Windows
 
 ```sh
-# install node dependencies
-npm i
+# install pnpm
+npm install -g pnpm
 
+# install node dependencies
+pnpm i
+```
+
+<h2 align="center">👨‍💻 Usage</h2>
+
+```sh
 # development: run webpack in watch mode
-npm run dev
+pnpm run dev
 
 # production: run webpack in production mode
-npm run prod
+pnpm run prod
 ```

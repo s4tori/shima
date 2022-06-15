@@ -5,7 +5,8 @@
 	<br /><br />
 
 [![license][license]][license-url]
-[![build][build]][build-url]
+[![build][build-img-shima]](go/)
+[![build][build-img-doc]](docs/)
 </div>
 
 <div align="center">
@@ -14,7 +15,7 @@
 	<br />
 </div>
 
-<h2 align="center">Gettings started</h2>
+<h2 align="center">🚀 Getting started</h2>
 
 You can use Shima as is without installing anything.
 Simply add a line of CSS and you're done:
@@ -25,10 +26,10 @@ Simply add a line of CSS and you're done:
 }
 ```
 
-View the online documentation for more information: https://shima-grid.com</p>
+The documentation with practical examples is available online: https://shima-grid.com.</p>
 
 
-<h2 align="center">Source code</h2>
+<h2 align="center">👨‍💻 Source code</h2>
 
 Shima is a small server written in Go rendering custom lovely grids 💖.
 
@@ -36,7 +37,7 @@ Shima is a small server written in Go rendering custom lovely grids 💖.
 * [Documentation](docs/)
 
 
-<h2 align="center">License</h2>
+<h2 align="center">📝 License</h2>
 
 Shima is [MIT licensed](./LICENSE).
 
@@ -44,7 +45,7 @@ Shima is [MIT licensed](./LICENSE).
 [//]: # (---------------------------------------------------------------------)
 
 [//]: # (Badges)
-[build]:       https://travis-ci.org/s4tori/shima.svg?branch=master
-[build-url]:   https://travis-ci.org/s4tori/shima
-[license]:     https://img.shields.io/badge/license-MIT-blue.svg
-[license-url]: ./LICENSE
+[build-img-shima]: https://github.com/s4tori/shima-upgrade/actions/workflows/workflow-go.yml/badge.svg
+[build-img-doc]:   https://github.com/s4tori/shima-upgrade/actions/workflows/workflow-docs.yml/badge.svg
+[license]:         https://img.shields.io/badge/license-MIT-blue.svg
+[license-url]:     ./LICENSE
