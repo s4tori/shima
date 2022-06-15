@@ -21,9 +21,13 @@
 		</shima-grid-manager>
 	</div>
 </template>
+<script setup>
+import ShimaGridManager from "src/component/GridManager/GridManager.vue";
+</script>
 <style lang="stylus">
 @import "~style/functions"
 @import "~style/mixins"
+
 
 .grid-example
 
@@ -31,29 +35,29 @@
 
 		h1
 			overflow hidden
-			white-space nowrap
 			text-overflow ellipsis
+			white-space nowrap
 
 		a
-			text-decoration none
-			color inherit
 			position relative
-			display inline-block
 			z-index 0
-			transition: all 0.3s ease-in-out;
-			$color = #fff87e
+			display inline-block
+			color inherit
+			text-decoration none
+			transition all 0.3s ease-in-out
+			$color = #FFF87E
 
 			&::after
-				$aColor = alpha(#fff87e, 0.6)
-				content ""
-				absolute top left -7px right -7px bottom 0
+				$aColor = alpha(#FFF87E, 0.6)
+				shima-absolute top left -7px right -7px bottom 0
+				z-index -1
 				height shima-vr()
-				background-image: linear-gradient(to top, $aColor 0%, $aColor 100%);
-				background-size 100% 5px
+				content ""
+				background-image linear-gradient(to top, $aColor 0%, $aColor 100%)
 				background-repeat no-repeat
 				background-position 0 100%
+				background-size 100% 5px
 				border-radius 10px
-				z-index: -1
 
 			&:hover
 				color darken($color, 50)
@@ -63,15 +67,3 @@
 			color: $base-color["api"]
 
 </style>
-<script>
-import ShimaGridManager from "src/component/GridManager/GridManager.vue";
-
-
-export default {
-
-	components: {
-		ShimaGridManager
-	}
-
-};
-</script>

@@ -1,4 +1,3 @@
-/* global global */
 /* eslint-disable no-console */
 import _            from "src/util/lodash";
 import getEnvConfig from "src/util/config";
@@ -75,9 +74,7 @@ export default {
 			+ ee + "\n"
 			+ "[def]\n💻 author:      [blue]shima[gray].[purple]author[gray]()[black]; [gray]↵"
 			+ "[def]\n💽 source-code: [blue]shima[gray].[purple]sourceCode[gray]()[black]; [gray]↵\n\n"
-			, aColor
-		);
-
+		, aColor);
 	}
 
 };

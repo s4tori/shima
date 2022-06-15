@@ -1,6 +1,6 @@
 <template>
 	<li
-		:class="{ 'example-item--active': curr === type }" class="example-item"
+		:class="{ 'example-item--active': modelValue === type }" class="example-item"
 		@click="setExample"
 	>
 		<a :href="'#example-' + type" class="example-item__link">
@@ -8,6 +8,24 @@
 		</a>
 	</li>
 </template>
+<script setup>
+import Cube from "src/component/Cube.vue";
+
+
+const emit  = defineEmits(["update:modelValue"]);
+const props = defineProps({
+	modelValue: { type: String, default: "vr" },
+	type:       { type: String, default: "vr" },
+	cube:       { type: Number, default: 0 }
+});
+
+
+// ### [Methods] ########################################
+
+function setExample() {
+	emit("update:modelValue", props.type);
+}
+</script>
 <style lang="stylus">
 @import "~style/functions"
 @import "~style/mixins"
@@ -17,30 +35,31 @@
 	position relative
 	display flex
 	align-items center
-	margin-bottom $base-spacing--xs
 	padding 0 $base-spacing--xs 0 0
+	margin-bottom $base-spacing--xs
+	overflow hidden
 	shima-font-size(-2)
 	color #678
 	cursor pointer
 	transition all 300ms ease-in-out
-	overflow hidden
 
 	&:after
+		shima-absolute top right bottom left
+		z-index -1
 		content ""
-		absolute: top right bottom left
 		background #DDD
 		border-radius 5px
-		z-index -1
+		opacity 0
 		transition all 300ms ease-in-out
 		transform translateX(-100%)
-		opacity 0
 
 	&:hover:after, &--active:after
-		transform translateX(0)
 		opacity 1
+		transform translateX(0)
 
 	&__link
 		display flex
+		flex-grow 1
 		align-items center
 		color inherit
 		text-decoration none
@@ -49,32 +68,3 @@
 		margin-right $base-spacing--sm
 
 </style>
-<script>
-import Cube from "src/component/Cube.vue";
-
-
-export default {
-
-	components: {
-		Cube
-	},
-
-	model: {
-		prop: "curr",
-		event: "input"
-	},
-
-	props: {
-		curr: { type: String, default: "vr" },
-		type: { type: String, default: "vr" },
-		cube: { type: Number, default: 0    }
-	},
-
-	methods: {
-		setExample() {
-			this.$emit("input", this.type);
-		}
-	}
-
-};
-</script>

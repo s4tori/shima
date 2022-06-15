@@ -14,6 +14,13 @@
 		</wrapper>
 	</header>
 </template>
+<script setup>
+import { ref } from "vue";
+import Wrapper from "src/component/Wrapper.vue";
+import Logo    from "./Logo.vue";
+
+const ee = ref(false);
+</script>
 <style lang="stylus">
 @import "~style/functions"
 @import "~style/mixins"
@@ -27,14 +34,14 @@
 
 	&__content
 		display flex
+		color alpha(#FFF, 0.9)
 		text-decoration none
-		color alpha(#FFF, .9)
 		outline none
 
 	&__text
-		margin-left auto
 		width shima-span(2, "wide")
 		max-width 100%
+		margin-left auto
 		text-align justify
 
 	&__title
@@ -45,7 +52,6 @@
 		opacity 0
 
 	&__logo
-		flex 1 1 500px
 		flex 1 1 shima-span(3, "wider") + shima-gutter()
 		shima-font-size(2)
 		padding-bottom shima-vr(2)
@@ -60,17 +66,16 @@
 			padding-right shima-vr()
 
 	&__jp
+		margin-bottom $base-spacing--lg
 		// 🌸 Set a font containing standard Kanji glyphs 🌸
 		// http://www.ruanyifeng.com/blog/2014/07/chinese_fonts.html
 		// https://stackoverflow.com/a/14573813
-		// http://www.xwbetter.com/font-family/
-		font-family "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", sans-serif, serif;
+		// https://gist.github.com/alex1504/112b462fbc08722a33a8915254410e22
+		font-family "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", sans-serif, serif
 		//font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif;
-		font-weight normal
 		shima-font-size(1)
-		margin-bottom $base-spacing--lg
+		font-weight normal
 		cursor pointer
-
 
 	+shima-mq("sm")
 		padding-top $base-spacing
@@ -100,22 +105,3 @@
 			text-align center
 
 </style>
-<script>
-import Wrapper from "src/component/Wrapper.vue";
-import Logo    from "./Logo.vue";
-
-export default {
-
-	components: {
-		Wrapper,
-		Logo
-	},
-
-	data() {
-		return {
-			ee: false
-		};
-	}
-
-};
-</script>

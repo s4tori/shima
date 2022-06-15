@@ -1,6 +1,6 @@
 <template>
 	<div class="logo">
-		<svg :viewBox="`0 0 ${(xGrid+xGutter) * 5 - 3 * w} ${yGrid}`" class="logo__svg" version="1.1" xmlns="http://www.w3.org/2000/svg">
+		<svg :viewBox="`0 0 ${(xGrid+xGutter) * 5 - 3 * w} ${yGrid}`" class="logo__svg" xmlns="http://www.w3.org/2000/svg">
 			<g :transform="`translate(0,0)`">
 				<cube :x="0"  :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
 				<cube :x="w"  :y="0"  :width="w" :height="h" :ee="ee" logo @deleted="inc" />
@@ -91,35 +91,35 @@
 		height 100%
 
 		.cube__main
-			transition all .3s ease-in-out
+			transition all 0.3s ease-in-out
 
 		//1, 4, ...
 		svg:nth-child(3n+1) rect.cube__main
-			stroke: alpha($base-color["api"], .8)
-			fill: alpha($base-color["api"], .8)
+			fill alpha($base-color["api"], 0.8)
+			stroke alpha($base-color["api"], 0.8)
 
 		// 2, 5, ...
 		svg:nth-child(3n+2) rect.cube__main
-			stroke: alpha($base-color["api"],  1)
-			fill: alpha($base-color["api"],  1)
+			fill alpha($base-color["api"],  1)
+			stroke alpha($base-color["api"],  1)
 
 		// 3, 6, ...
 		svg:nth-child(3n) rect.cube__main
-			stroke: alpha($base-color["api"], .5)
-			fill: alpha($base-color["api"], .5)
+			fill alpha($base-color["api"], 0.5)
+			stroke alpha($base-color["api"], 0.5)
 
 		svg:hover rect.cube__main
-			stroke: none
-			fill: alpha(white, .5)
+			fill alpha(white, 0.5)
+			stroke none
 
 	rect
 		fill yellow
-		//stroke red
-		//stroke-width 2px
+		// stroke red
+		// stroke-width 2px
 
 	&__svg2
+		shima-absolute top right bottom left
 		display block
-		absolute top right bottom left
 		width 100%
 		height 100%
 
@@ -155,7 +155,7 @@ export default {
 			xGrid: 128, xDiv: 4, xGutter: 16,
 			yGrid: 160, yDiv: 5, yGutter: 16,
 			cube: "Cube",
-			ee: this.forceEe,
+			ee: this.toggleEe,
 			nbCubeDestroyed: 0,
 			totalCubes: (13 + 11 + 5 + 12 + 13)
 		};

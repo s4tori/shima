@@ -7,15 +7,6 @@
 		/>
 	</div>
 </template>
-<script>
+<script setup>
 import ShimaGridManager from "src/component/GridManager/GridManager.vue";
-
-
-export default {
-
-	components: {
-		ShimaGridManager
-	}
-
-};
 </script>

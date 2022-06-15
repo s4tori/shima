@@ -5,7 +5,7 @@
 			:y-grid="yGrid" :y-div="yDiv" :y-gutter="yGutter"
 			:t="type"
 		>
-			<svg class="gex-isobl__svg" version="1.1" xmlns="http://www.w3.org/2000/svg">
+			<svg class="gex-isobl__svg" xmlns="http://www.w3.org/2000/svg">
 				<g :transform="transform">
 					<g :transform="`translate(${(xGrid+xGutter) * 2},${-(xGrid+yGutter) * 1})`">
 						<rect :x="0"  :y="0"  :width="w" :height="h" class="gex-layer1" />
@@ -87,33 +87,8 @@
 		</shima-grid-manager>
 	</div>
 </template>
-<style lang="stylus">
-@import "~style/settings"
-@import "~style/mixins"
-
-
-.gex-isobl
-	&__svg
-		display block
-		absolute top right bottom left
-		width 100%
-		height 100%
-
-		.gex-layer1
-			fill red
-			fill: $base-color["api"]
-
-		.gex-layer2
-			fill green
-			fill: $base-color["api"]
-
-		.gex-layer3
-			fill blue
-			fill: $base-color["default"]
-
-</style>
 <script>
-import { _ } from "src/util";
+import { _ }            from "src/util";
 import ShimaGridManager from "src/component/GridManager/GridManager.vue";
 
 
@@ -152,3 +127,28 @@ export default {
 
 };
 </script>
+<style lang="stylus">
+@import "~style/settings"
+@import "~style/mixins"
+
+
+.gex-isobl
+	&__svg
+		shima-absolute top right bottom left
+		display block
+		width 100%
+		height 100%
+
+		.gex-layer1
+			fill red
+			fill: $base-color["api"]
+
+		.gex-layer2
+			fill green
+			fill: $base-color["api"]
+
+		.gex-layer3
+			fill blue
+			fill: $base-color["default"]
+
+</style>

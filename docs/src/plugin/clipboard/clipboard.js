@@ -4,30 +4,28 @@ import { _ }     from "src/util";
 
 // Example :
 // <code>
-// <button v-clipboard="myDynamicValue">Text</button>
+// <button v-clipboard="myDynamicValue" @copied="copied">Text</button>
 //</code>
-export default function (Vue) {
+export default function (app) {
 
-	Vue.directive("clipboard", {
-		bind: function (el, binding, vnode) {
+	app.directive("clipboard", {
+		beforeMount(el, binding, vnode) {
 			el._cbText = binding.value;
 			el._cbElem = new Clipboard(el, {
 				text: () => el._cbText
 			});
 
-			const handler = _.get(vnode, "data.on.copied");
-
+			const handler = _.get(vnode, "props.onCopied");
 			el._cbElem.on("success", () => {
-				// vnode.context.$emit("copied")
-				handler && handler.fns();
+				handler && handler();
 			});
 		},
 
-		componentUpdated: function (el, binding) {
+		updated(el, binding) {
 			el._cbText = binding.value;
 		},
 
-		unbind: function (el) {
+		unmounted(el) {
 			el._cbElem && el._cbElem.destroy();
 		}
 	});

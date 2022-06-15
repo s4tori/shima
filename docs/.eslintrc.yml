@@ -8,18 +8,19 @@ plugins:
     - vue
 
 extends:
-    - plugin:vue/recommended
+    - plugin:vue/vue3-recommended
 
 parserOptions:
-    ecmaVersion: 8
+    ecmaVersion: 2018
     sourceType: module
     ecmaFeatures:
-        experimentalObjectRestSpread: true
         jsx: true
 
 globals:
     __DEVELOPMENT__: true
     __CONFIG__: true
+    module: true
+    global: true
 
 rules:
     array-bracket-spacing: ["warn", "never"]
@@ -75,4 +76,7 @@ rules:
     vue/html-indent: ["error", "tab"]
     vue/max-attributes-per-line: "off"
     vue/html-self-closing: ["error", { "html": { "void": "always", "normal": "always", "component": "always" }, "svg": "always", "math": "always"}]
+    vue/multi-word-component-names: "off"
     vue/no-multi-spaces: "off"
+    vue/component-tags-order: "off"
+    vue/singleline-html-element-content-newline: "off"

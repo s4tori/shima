@@ -3,7 +3,8 @@
 		<component :is="component" />
 	</div>
 </template>
-<script>
+<script setup>
+import { computed }   from "vue";
 import GridManager    from "src/component/GridManager/GridManager.vue";
 import VerticalRhythm from "src/component/GridManagerExample/VerticalRhythm.vue";
 import Layout         from "src/component/GridManagerExample/Layout.vue";
@@ -16,41 +17,22 @@ import StripeRight    from "src/component/GridManagerExample/StripeRight.vue";
 import StripeLeft     from "src/component/GridManagerExample/StripeLeft.vue";
 
 
-export default {
+const props = defineProps({
+	type: { type: String, default: "vr" }
+});
 
-	components: {
-		GridManager,
-		VerticalRhythm,
-		Blueprint,
-		Layout,
-		VRGrid,
-		Icon,
-		Iso,
-		Oblique,
-		StripeRight,
-		StripeLeft
-	},
-
-	props: {
-		type: { type: String, default: "vr" }
-	},
-
-	computed: {
-		component() {
-			switch (this.type) {
-				case "vr"      : return "VerticalRhythm";
-				case "layout"  : return "Layout";
-				case "vrgrid"  : return "VRGrid";
-				case "bp"      : return "Blueprint";
-				case "icon"    : return "Icon";
-				case "iso"     : return "Iso";
-				case "oblique" : return "Oblique";
-				case "stripe-r": return "StripeRight";
-				case "stripe-l": return "StripeLeft";
-				default        : return "GridManager";
-			}
-		}
+const component = computed(() => {
+	switch (props.type) {
+		case "vr"      : return VerticalRhythm;
+		case "layout"  : return Layout;
+		case "vrgrid"  : return VRGrid;
+		case "bp"      : return Blueprint;
+		case "icon"    : return Icon;
+		case "iso"     : return Iso;
+		case "oblique" : return Oblique;
+		case "stripe-r": return StripeRight;
+		case "stripe-l": return StripeLeft;
+		default        : return GridManager;
 	}
-
-};
+});
 </script>

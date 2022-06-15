@@ -29,48 +29,9 @@
 		</block-option>
 	</block>
 </template>
-<style lang="stylus">
-@import "~style/functions"
-@import "~style/mixins"
-
-
-.api-general
-
-	&__type
-		position relative
-		text-decoration underline
-		color: $base-color["api"]
-
-		svg
-			margin-left $base-spacing--xs
-
-		&:after
-			content ""
-			absolute: top -5px right -12px bottom -5px left -12px
-			border-radius 5px
-			opacity 0
-			transition all .3s ease-in-out
-
-		&:hover:after
-			opacity 1
-			background alpha($base-color["api"], .1)
-
-</style>
-<script>
+<script setup>
 import Block       from "./Block.vue";
 import BlockUrl    from "./BlockUrl.vue";
 import BlockOption from "./BlockOption.vue";
 import Icon        from "src/component/Icon.vue";
-
-
-export default {
-
-	components: {
-		Block,
-		BlockUrl,
-		BlockOption,
-		Icon
-	}
-
-};
 </script>

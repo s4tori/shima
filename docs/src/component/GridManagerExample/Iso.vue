@@ -1,15 +1,6 @@
 <template>
 	<iso-oblique type="isometric" />
 </template>
-<script>
+<script setup>
 import IsoOblique from "src/component/GridManagerExample/IsoOblique.vue";
-
-
-export default {
-
-	components: {
-		IsoOblique
-	}
-
-};
 </script>

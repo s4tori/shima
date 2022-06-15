@@ -8,9 +8,19 @@
 		</div>
 	</div>
 </template>
+<script setup>
+import Icon from "src/component/Icon.vue";
+
+
+defineProps({
+	id   : { type: String, default: "" },
+	title: { type: String, default: "" }
+});
+</script>
 <style lang="stylus">
 @import "~style/functions"
 @import "~style/mixins"
+
 
 .block
 	&__title
@@ -32,31 +42,14 @@
 			margin-bottom shima-vr()
 
 			+shima-mq("sm")
-				padding 0 $base-spacing--sm
 				display block
+				padding 0 $base-spacing--sm
 
 	em
-		text-decoration none
-		color: $base-color["blue"]
 		font-family $base-font-code
 		font-style normal
 		line-height $base-line-height - 2px // font-family fix
+		color: $base-color["blue"]
+		text-decoration none
 
 </style>
-<script>
-import Icon from "src/component/Icon.vue";
-
-
-export default {
-
-	props: {
-		id   : { type: String, default: "" },
-		title: { type: String, default: "" }
-	},
-
-	components: {
-		Icon
-	}
-
-};
-</script>

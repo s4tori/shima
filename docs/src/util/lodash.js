@@ -7,10 +7,10 @@ import _indexOf   from "lodash/indexOf";
 import _isNumber  from "lodash/isNumber";
 import _isString  from "lodash/isString";
 import _random    from "lodash/random";
+import _replace   from "lodash/replace";
 import _round     from "lodash/round";
 import _slice     from "lodash/slice";
 import _split     from "lodash/split";
-import _trimStart from "lodash/trimStart";
 import _values    from "lodash/values";
 
 
@@ -24,10 +24,10 @@ _.indexOf   = _indexOf;
 _.isNumber  = _isNumber;
 _.isString  = _isString;
 _.random    = _random;
+_.replace   = _replace;
 _.round     = _round;
 _.slice     = _slice;
 _.split     = _split;
-_.trimStart = _trimStart;
 _.values    = _values;
 
 // Custom build for lodash
@@ -45,6 +45,6 @@ export { _random };
 export { _round };
 export { _slice };
 export { _split };
-export { _trimStart };
+export { _replace };
 export { _values };
 export default _;

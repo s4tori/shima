@@ -22,9 +22,13 @@
 		</shima-grid-manager>
 	</div>
 </template>
+<script setup>
+import ShimaGridManager from "src/component/GridManager/GridManager.vue";
+</script>
 <style lang="stylus">
 @import "~style/functions"
 @import "~style/mixins"
+
 
 .gex-vrgrid
 
@@ -33,30 +37,30 @@
 
 		h1
 			overflow hidden
-			white-space nowrap
 			text-overflow ellipsis
+			white-space nowrap
 
 		a
 			$redColor = #EC173A
-			text-decoration none
-			color inherit
 			position relative
-			display inline-block
 			z-index 0
-			transition: all 0.3s ease-in-out;
-			box-shadow 0 5px 0 alpha($redColor, .2)
+			display inline-block
+			color inherit
+			text-decoration none
+			box-shadow 0 5px 0 alpha($redColor, 0.2)
+			transition all 0.3s ease-in-out
 
 			&:hover
 				color darken($redColor, 20)
 
 	&__img
 		display flex
-		justify-content center
 		align-items center
+		justify-content center
 		height shima-vr(8)
-		margin-bottom: shima-vr()
+		margin-bottom shima-vr()
 		color black
-		background alpha(#EAEAEA, .8)
+		background alpha(#EAEAEA, 0.8)
 
 	&__text
 		flex 1 0 shima-span(2)
@@ -65,30 +69,30 @@
 
 	// To override ".main h2"
 	& h2&__title
-		background none
 		color inherit
+		background none
 
 		&::after
 			display none
 
 	&__img
-		width shima-span(2)
 		flex 0 0 shima-span(2)
+		width shima-span(2)
 		margin-right shima-gutter()
-		background alpha(#0074D9, .9)
 		color white
+		background alpha(#0074D9, 0.9)
 
-		$c1  = alpha(#ECEDDC, .2)
+		$c1  = alpha(#ECEDDC, 0.2)
 		$c2  = alpha(#EC173A, 1)
 		$l1 = linear-gradient(135deg, $c1 25%, transparent 25%) -50px 0
 		$l2 = linear-gradient(225deg, $c1 25%, transparent 25%) -50px 0
 		$l3 = linear-gradient(315deg, $c1 25%, transparent 25%)
 		$l4 = linear-gradient( 45deg, $c1 25%, transparent 25%)
 		background $l1, $l2, $l3, $l4
-		background-size 100px 100px
 		background-color $c2
+		background-size 100px 100px
 		border-radius 10px
-		box-shadow 0 5px 0 alpha(darken($c2, 20), .8)
+		box-shadow 0 5px 0 alpha(darken($c2, 20), 0.8)
 
 	&__row
 		display flex
@@ -110,15 +114,3 @@
 			margin-right 0
 
 </style>
-<script>
-import ShimaGridManager from "src/component/GridManager/GridManager.vue";
-
-
-export default {
-
-	components: {
-		ShimaGridManager
-	}
-
-};
-</script>

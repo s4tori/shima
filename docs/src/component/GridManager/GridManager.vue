@@ -52,161 +52,6 @@
 		</div>
 	</div>
 </template>
-<style lang="stylus">
-@import "~style/functions"
-@import "~style/mixins"
-
-
-.grid
-	margin 0
-	margin-bottom shima-vr(3)
-	background white
-	position relative
-	border-bottom 5px solid #EAEAEA
-
-	&__main
-		border-top 1px solid #EEEEEE
-		background-color #FAFAFA
-		padding $base-spacing
-		//box-shadow inset 0px 0px 30px #ECECEC
-
-	&__content
-		position relative
-		box-shadow inset 0px 0px 30px #ECECEC
-		box-shadow inset 0px 0px 1px #EEEEEE
-		min-height shima-vr(10) - 1
-		overflow hidden
-
-		&:before, &:after
-			content ""
-			position absolute
-			top 0
-			right 0
-			bottom 0
-			left 0
-			pointer-events none
-
-		&:before
-			border 1px dashed #ECECEC
-
-		&:after
-			display none
-
-	&__form
-		margin $base-spacing--sm shima-gutter()
-		color #667788
-
-		p
-			white-space nowrap
-			overflow hidden
-			text-overflow ellipsis
-			shima-font-size(-2)
-
-	&__row
-		display flex
-		flex-wrap wrap
-
-		// Alignment per row
-		&--top
-			align-items flex-start
-		&--bottom
-			align-items flex-end
-		&--center
-			align-items center
-
-	// https://philipwalton.github.io/solved-by-flexbox/demos/grids/
-	// https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md#components
-	&__cell
-		flex 1
-
-		&--1of2
-			flex: 0 0 50%
-		&--1of3
-			flex: 0 0 33.3333%
-		&--1of4
-			flex: 0 0 25%
-
-		&--gutter
-			margin-left: shima-gutter()
-
-		&--axis
-			w = $grid-cell * 3
-			flex  0 0 w
-			width w
-
-			p
-				margin-bottom $base-spacing--sm
-
-				&:first-child
-					margin-bottom 0
-
-	&__input
-		display block
-		width 100%
-		-moz-appearance textfield
-		border 1px solid #EEEEEE
-		height: shima-vr()
-		shima-font-size(-2, shima-vr())
-		//top -1px
-		margin 0 0 $base-spacing--sm 0
-		padding 0 $base-spacing--xs
-		outline 0
-		$input-hover-active = $base-color["ip-active"]
-
-		&::placeholder
-			color #BCD
-
-		&:focus
-			border-color: $input-hover-active
-			border-image: linear-gradient(90deg, $input-hover-active, rgba($input-hover-active, 0)) 1;
-
-		&::-webkit-outer-spin-button,
-		&::-webkit-inner-spin-button
-			-webkit-appearance none
-			margin 0
-
-		&--1
-			border-right none
-
-		&--2
-			border-left none
-			border-right none
-			&:focus
-				border-image: linear-gradient(90deg, rgba($input-hover-active, 0), $input-hover-active, rgba($input-hover-active, 0)) 1;
-
-		&--3
-			border-left none
-			&:focus
-				border-image: linear-gradient(-90deg, $input-hover-active, rgba($input-hover-active, 0)) 1;
-
-	&__code
-		min-height 100px
-		overflow hidden
-
-	&__cb
-		padding-top $base-spacing
-		shima-font-size(-2, shima-vr())
-		vertical-align: middle;
-
-	+shima-mq("sm")
-		&__cell
-			&--axis
-				display none
-
-			&--break::before, &--break::after
-				display: block;
-				content: ""
-				width 100%
-				order: 1;
-
-			&--break
-				width: 100%
-
-			&--first-gutter
-				margin-left 0
-
-
-</style>
 <script>
 import { _ }            from "src/util";
 import { getEnvConfig } from "src/util";
@@ -239,7 +84,7 @@ export default {
 
 	data() {
 		return {
-			gid: "grid-manager-" + this._uid,
+			gid: "grid-manager-" + this.$.uid,
 			gUrl: "",
 			base: getEnvConfig("urlGrid"),
 			x: {
@@ -319,7 +164,7 @@ export default {
 		this.setGridUrl = _.debounce(this.setGridUrl, 500, { leading: false, trailing: true });
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.removeGridOnTop();
 	},
 
@@ -328,7 +173,7 @@ export default {
 
 	methods: {
 		setGridUrl(url) {
-			this.addGridOnTop(url);
+			!global.__SSR__ && this.addGridOnTop(url);
 			return this.gUrl = url;
 		},
 
@@ -367,3 +212,155 @@ export default {
 
 };
 </script>
+<style lang="stylus">
+@import "~style/functions"
+@import "~style/mixins"
+
+
+.grid
+	position relative
+	margin 0
+	margin-bottom shima-vr(3)
+	background white
+	border-bottom 5px solid #EAEAEA
+
+	&__main
+		padding $base-spacing
+		background-color #FAFAFA
+		border-top 1px solid #EEEEEE
+		// box-shadow inset 0 0 30px #ECECEC
+
+	&__content
+		position relative
+		min-height shima-vr(10) - 1
+		overflow hidden
+		box-shadow inset 0 0 1px #EEEEEE
+
+		&:before, &:after
+			position absolute
+			top 0
+			right 0
+			bottom 0
+			left 0
+			pointer-events none
+			content ""
+
+		&:before
+			border 1px dashed #ECECEC
+
+		&:after
+			display none
+
+	&__form
+		margin $base-spacing--sm shima-gutter()
+		color #667788
+
+		p
+			overflow hidden
+			text-overflow ellipsis
+			white-space nowrap
+			shima-font-size(-2)
+
+	&__row
+		display flex
+		flex-wrap wrap
+
+		// Alignment per row
+		&--top
+			align-items flex-start
+		&--bottom
+			align-items flex-end
+		&--center
+			align-items center
+
+	// https://philipwalton.github.io/solved-by-flexbox/demos/grids/
+	// https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md#components
+	&__cell
+		flex 1
+
+		&--1of2
+			flex 0 0 50%
+		&--1of3
+			flex 0 0 33.3333%
+		&--1of4
+			flex 0 0 25%
+
+		&--gutter
+			margin-left shima-gutter()
+
+		&--axis
+			w = $grid-cell * 3
+			flex  0 0 w
+			width w
+
+			p
+				margin-bottom $base-spacing--sm
+
+				&:first-child
+					margin-bottom 0
+
+	&__input
+		display block
+		width 100%
+		height shima-vr()
+		padding 0 $base-spacing--xs
+		margin 0 0 $base-spacing--sm 0
+		shima-font-size(-2, shima-vr())
+		border 1px solid #EEEEEE
+		outline 0
+		-moz-appearance textfield
+		$input-hover-active = $base-color["ip-active"]
+
+		&::placeholder
+			color #BCD
+
+		&:focus
+			border-color $input-hover-active
+			border-image linear-gradient(90deg, $input-hover-active, rgba($input-hover-active, 0)) 1
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button
+			-webkit-appearance none
+			margin 0
+
+		&--1
+			border-right none
+
+		&--2
+			border-right none
+			border-left none
+			&:focus
+				border-image linear-gradient(90deg, rgba($input-hover-active, 0), $input-hover-active, rgba($input-hover-active, 0)) 1
+
+		&--3
+			border-left none
+			&:focus
+				border-image linear-gradient(-90deg, $input-hover-active, rgba($input-hover-active, 0)) 1
+
+	&__code
+		min-height 100px
+		overflow hidden
+
+	&__cb
+		padding-top $base-spacing
+		shima-font-size(-2, shima-vr())
+		vertical-align middle
+
+	+shima-mq("sm")
+		&__cell
+			&--axis
+				display none
+
+			&--break::before, &--break::after
+				display block
+				order 1
+				width 100%
+				content ""
+
+			&--break
+				width 100%
+
+			&--first-gutter
+				margin-left 0
+
+</style>

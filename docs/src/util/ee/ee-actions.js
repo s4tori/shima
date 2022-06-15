@@ -15,6 +15,7 @@ export default (g) => {
 			eeColorize.colorize("lovingly [red]♥[black] brought to you by:");
 			return "547021 [¬_¬]~";
 		}
+
 	};
 
 };

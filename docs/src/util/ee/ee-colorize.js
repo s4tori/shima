@@ -64,8 +64,8 @@ export default {
 			return;
 		}
 
-		// On Chrome, we now can't break lines when we use colors (%c) with console.log
-		// We need to split each line. :-/
+		// On Chrome, we can't break lines when we use colors (%c) with console.log
+		// We need to split each line. 😒
 		let iColor = 0;
 		this.isChrome()
 			? _.forEach(text.split("\n"), line => {

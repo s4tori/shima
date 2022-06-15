@@ -1,7 +1,7 @@
 <template>
 	<div class="shima-gp">
 		<div class="shima-gp__input" @click="updateValue">
-			<svg class="shima-gp__svg" version="1.1" xmlns="http://www.w3.org/2000/svg">
+			<svg class="shima-gp__svg" xmlns="http://www.w3.org/2000/svg">
 				<defs>
 					<pattern :id="pid" :patternTransform="pt" :width="w" :height="h" x="0" y="0" patternUnits="userSpaceOnUse">
 						<g transform="translate(0.5, 0.5)">
@@ -14,42 +14,18 @@
 		</div>
 	</div>
 </template>
-
-<style lang="stylus">
-@import "~style/functions"
-
-.shima-gp
-	position relative
-
-	&__input
-		display block
-		border 1px solid #EEEEEE
-		border-radius 3px
-		height shima-vr(2) + $base-spacing--sm
-		background white
-		cursor pointer
-		overflow hidden
-
-	&__svg
-		width 100%
-		height 100%
-
-		path
-			stroke: #DDD
-			stroke-width: 1px
-			fill: none
-
-</style>
 <script>
 export default {
 
 	props: {
-		value: { type: String, default: "" }
+		modelValue: { type: String,  default: "" }
 	},
+
+	emits: ["update:modelValue"],
 
 	data: function () {
 		return {
-			pid: "pattern-grid-" + this._uid,
+			pid: "pattern-grid-" + this.$.uid,
 			types: ["standard", "oblique", "isometric", "2-1-isometric", "trimetric-left", "trimetric-right"],
 			current: 0,
 			w: 20,
@@ -59,7 +35,7 @@ export default {
 
 	computed: {
 		pt() {
-			switch (this.value) {
+			switch (this.modelValue) {
 				case "standard"       : return null;
 				case "oblique"        : return "matrix(1,1.000,-1.000,1,0,0) scale(0.707,0.707)";
 				case "isometric"      : return "matrix(1,0.577,-1.732,1,0,0) scale(0.866,0.500)";
@@ -76,9 +52,35 @@ export default {
 
 	methods: {
 		updateValue() {
-			this.$emit("input", this.types[++this.current % this.types.length]);
+			this.$emit("update:modelValue", this.types[++this.current % this.types.length]);
 		}
 	}
 
 };
 </script>
+<style lang="stylus">
+@import "~style/functions"
+
+
+.shima-gp
+	position relative
+
+	&__input
+		display block
+		height shima-vr(2) + $base-spacing--sm
+		overflow hidden
+		cursor pointer
+		background white
+		border 1px solid #EEEEEE
+		border-radius 3px
+
+	&__svg
+		width 100%
+		height 100%
+
+		path
+			fill none
+			stroke #DDD
+			stroke-width 1px
+
+</style>

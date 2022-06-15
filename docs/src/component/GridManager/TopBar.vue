@@ -1,14 +1,47 @@
 <template>
 	<div class="grid-url">
-		<div class="grid-url__value"  target="_blank">{{ url }}</div>
+		<div class="grid-url__value">{{ url }}</div>
 		<button
 			v-clipboard:copy="url"
 			:class="clsButton" class="grid-url__button"
-			@copied="copied">
+			@copied="copied"
+		>
 			{{ text }}
 		</button>
 	</div>
 </template>
+<script setup>
+import { onBeforeUnmount, ref } from "vue";
+
+
+defineProps({
+	url: { type: String, default: "" }
+});
+
+let text       = ref("Copy URL");
+let clsButton  = ref("");
+let timer      = null;
+
+
+// ### [Lifecycle] ######################################
+
+onBeforeUnmount(() => {
+	timer && clearTimeout(timer);
+});
+
+
+// ### [Methods] ########################################
+
+function copied() {
+	text.value      = "Copied!";
+	clsButton.value = "button--active";
+
+	timer = setTimeout(() => {
+		text.value      = "Copy URL";
+		clsButton.value = "";
+	}, 1500);
+}
+</script>
 <style lang="stylus">
 @import "~style/functions"
 @import "~style/mixins"
@@ -17,45 +50,43 @@
 .grid-url
 	display flex
 	align-items center
-	border-bottom 1px solid #F2F2F2
 	overflow hidden
+	border-bottom 1px solid #F2F2F2
 	shima-font-size(-2, shima-vr() + $base-spacing--sm - 1)
 
 	&__value
-		shima-font-size(-2, shima-vr() + $base-spacing--sm - 1)
 		margin-left shima-span()
-		text-decoration none
-		color black
-		cursor pointer
 		overflow hidden
-		white-space nowrap
+		shima-font-size(-2, shima-vr() + $base-spacing--sm - 1)
+		color black
+		text-decoration none
 		text-overflow ellipsis
+		white-space nowrap
+		cursor pointer
 
 	&__button
 		display inline-block
 		width 110px
-		margin-left auto
-		margin-right $base-spacing
 		padding 0 $base-spacing--sm
+		margin-right $base-spacing
+		margin-left auto
+		shima-font-size(-2, shima-vr())
+		cursor pointer
+		background white
 		border 1px solid #EEEEEE
 		border-radius 3px
-		background white
-		cursor pointer
-		shima-font-size(-2, shima-vr())
 		outline none
-		transition all .3s ease-in-out
+		transition all 0.3s ease-in-out
 
 		@keyframes pulse
 			0%
-				box-shadow: 0 0 0 0 $base-color["cb-active"]
 				background-color white
+				box-shadow: 0 0 0 0 $base-color["cb-active"]
 
 		&.button--active
-			animation: pulse 1s;
-			box-shadow: 0 0 0 20px rgba(255, 255, 255, 0)
-			background-color: $base-color["cb-active"];
-			color white
 			pointer-events none
+			box-shadow 0 0 0 20px rgba(255, 255, 255, 0)
+			animation pulse 1s
 
 		&:hover
 			border-color: $base-color["cb-active"]
@@ -70,36 +101,3 @@
 			display none
 
 </style>
-<script>
-export default {
-
-	props: {
-		url: { type: String, default: "" }
-	},
-
-	data() {
-		return {
-			text: "Copy URL",
-			clsButton: ""
-		};
-	},
-
-
-	// ### [Methods] ########################################
-
-	methods: {
-
-		copied() {
-			this.text      = "Copied!";
-			this.clsButton = "button--active";
-
-			setTimeout(() => {
-				this.text      = "Copy URL";
-				this.clsButton = "";
-			}, 1500);
-		}
-
-	}
-
-};
-</script>

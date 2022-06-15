@@ -8,48 +8,14 @@
 		/>
 		<sketch-picker
 			v-if="displayPicker"
-			:value="colors"
+			:model-value="colors"
 			class="shima-cp__picker"
-			@input="updateValueFromPicker"
+			@update:model-value="updateValueFromPicker"
 		/>
 	</div>
 </template>
-<style lang="stylus">
-@import "~style/functions"
-
-
-.shima-cp
-	position relative
-	height shima-vr()
-	margin-bottom $base-spacing--sm
-	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMElEQVQ4T2N89uzZfwY8QFJSEp80A+OoAcMiDP7//483HTx//hx/Ohg1gIFx6IcBALl+VXknOCvFAAAAAElFTkSuQmCC");
-	border 1px solid #EEEEEE
-	border-radius 3px
-
-	&__input
-		display block
-		border none
-		background #00D99E
-		outline none
-		cursor pointer
-		width 100%
-		border-radius 3px
-		overflow: hidden
-		height: shima-vr()
-		line-height: shima-vr()
-
-	&__picker
-		position absolute !important
-		top shima-vr() + $base-spacing--xs
-		right 0
-		z-index 1
-
-		input
-			line-height 12px
-
-</style>
 <script>
-import { Sketch } from "vue-color";
+import { Sketch } from "@ckpack/vue-color";
 import { _ }      from "src/util";
 
 
@@ -59,22 +25,17 @@ export default {
 		"sketch-picker": Sketch
 	},
 
-	// https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
-	// We use "v-model=" instead of ":color.sync="
-	model: {
-		prop: "color",
-		event: "input"
+	props: {
+		modelValue: { type: String, default: "#00D99E" }
 	},
 
-	props: {
-		color: { type: String, default: "#194d33" }
-	},
+	emits: ["update:modelValue"],
 
 	data: function () {
-		const cols = this.color ? _.split(this.color, "-", 4) : [""];
+		const cols = this.modelValue ? _.split(this.modelValue, "-", 4) : [""];
 		const c    = cols.length > 1
 			? `rgba(${cols[0]},${cols[1]},${cols[2]},${cols[3]})`
-			: "#" + this.color
+			 : "#" + this.modelValue //: "#00D99E"
 		;
 
 		return {
@@ -99,9 +60,7 @@ export default {
 		},
 
 		hidePicker() {
-			// https://vuejs.org/v2/guide/components.html#sync-Modifier
-			// this.$emit("update:color", this.getGridColor(this.colors));
-			this.$emit("input", this.getGridColor(this.colors));
+			this.$emit("update:modelValue", this.getGridColor(this.colors));
 			document.removeEventListener("click", this.documentClick);
 			this.displayPicker = false;
 		},
@@ -123,7 +82,7 @@ export default {
 		getGridColor(colors) {
 			const c = colors;
 			// If vue-color hasn't called "updateValueFromPicker" fonction yet
-			if (_.isString(c)) { return this.color; }
+			if (_.isString(c)) { return this.modelValue; }
 			return (c.a < 1 && c.rgba) ? `${c.rgba.r}-${c.rgba.g}-${c.rgba.b}-${_.round(c.a, 1)}` : c.hex.substring(1);
 		},
 
@@ -138,3 +97,37 @@ export default {
 
 };
 </script>
+<style lang="stylus">
+@import "~style/functions"
+
+
+.shima-cp
+	position relative
+	height shima-vr()
+	margin-bottom $base-spacing--sm
+	background-image url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMElEQVQ4T2N89uzZfwY8QFJSEp80A+OoAcMiDP7//483HTx//hx/Ohg1gIFx6IcBALl+VXknOCvFAAAAAElFTkSuQmCC")
+	border 1px solid #EEEEEE
+	border-radius 3px
+
+	&__input
+		display block
+		width 100%
+		height shima-vr()
+		overflow hidden
+		line-height shima-vr()
+		cursor pointer
+		background #00D99E
+		border none
+		border-radius 3px
+		outline none
+
+	&__picker
+		position absolute !important
+		top shima-vr() + $base-spacing--xs
+		right 0
+		z-index 1
+
+		input
+			line-height 12px
+
+</style>

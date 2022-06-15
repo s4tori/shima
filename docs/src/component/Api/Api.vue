@@ -11,6 +11,18 @@
 		</wrapper>
 	</div>
 </template>
+<script setup>
+import { ref }       from "vue";
+import ApiGeneral    from "./ApiGeneral.vue";
+import ApiAxis       from "./ApiAxis.vue";
+import ApiColor      from "./ApiColor.vue";
+import Wrapper       from "src/component/Wrapper.vue";
+import Icon          from "src/component/Icon.vue";
+import ShimaCheckbox from "src/component/Checkbox.vue";
+
+
+const grid = ref(false);
+</script>
 <style lang="stylus">
 @import "~style/functions"
 @import "~style/mixins"
@@ -21,15 +33,15 @@
 
 	&__content
 		position relative
+		overflow hidden
+		color: $base-color["api"]
 		background white
 		border-bottom 5px solid #EAEAEA
-		color: $base-color["api"]
-		overflow hidden
 
 	&__cb
 		position absolute
-		right $base-spacing
 		top shima-gutter(1)
+		right $base-spacing
 		z-index 1
 
 		+shima-mq("sm")
@@ -37,50 +49,22 @@
 
 	&__def
 		position relative
-		text-decoration underline
 		color: $base-color["api"]
+		text-decoration underline
 		outline none
 
 		svg
 			margin-left $base-spacing--xs
 
 		&:after
+			shima-absolute top -5px right -12px bottom -5px left -12px
 			content ""
-			absolute: top -5px right -12px bottom -5px left -12px
 			border-radius 5px
 			opacity 0
-			transition all .3s ease-in-out
+			transition all 0.3s ease-in-out
 
 		&:hover:after
+			background alpha($base-color["api"], 0.1)
 			opacity 1
-			background alpha($base-color["api"], .1)
 
 </style>
-<script>
-import ApiGeneral    from "./ApiGeneral.vue";
-import ApiAxis       from "./ApiAxis.vue";
-import ApiColor      from "./ApiColor.vue";
-import Wrapper       from "src/component/Wrapper.vue";
-import Icon          from "src/component/Icon.vue";
-import ShimaCheckbox from "src/component/Checkbox.vue";
-
-
-export default {
-
-	components: {
-		ApiGeneral,
-		ApiAxis,
-		ApiColor,
-		Wrapper,
-		Icon,
-		ShimaCheckbox
-	},
-
-	data() {
-		return {
-			grid: false
-		};
-	}
-
-};
-</script>

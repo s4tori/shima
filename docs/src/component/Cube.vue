@@ -1,6 +1,6 @@
 <template>
 	<transition :duration="300" name="cube--fade">
-		<svg v-if="!goodBye" :class="{'cube--logo': logo }" class="cube" version="1.1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+		<svg v-if="!goodBye" :class="{'cube--logo': logo }" class="cube" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
 			<g class="cube__transition">
 				<g v-if="logo">
 					<rect
@@ -13,7 +13,7 @@
 					<rect class="cube__main" x="2" y="2" width="27" height="27" rx="2" ry="2" />
 				</g>
 
-				<g :transform="gr ? 'rotate(45, 16, 16)' : null">
+				<g v-if="t >= 0" :transform="gr ? 'rotate(45, 16, 16)' : null">
 					<rect v-if="d[0] === 1" :transform="p[0].t" :x="p[0].x" :y="p[0].y" width="4"  height="4" class="cube__mini" />
 					<rect v-if="d[1] === 1" :transform="p[1].t" :x="p[1].x" :y="p[1].y" width="4"  height="4" class="cube__mini" />
 					<rect v-if="d[2] === 1" :transform="p[2].t" :x="p[2].x" :y="p[2].y" width="4"  height="4" class="cube__mini" />
@@ -36,64 +36,6 @@
 		</svg>
 	</transition>
 </template>
-
-<style lang="stylus">
-@import "~style/functions"
-
-.cube
-	position relative
-	width 32px
-	height 32px
-	opacity 1
-	display inline-block
-
-	&__transition
-		cursor pointer
-		//transform-origin center center
-		//transform scale(0.9)
-
-	&--fade-enter-active &__transition, &--fade-leave-active &__transition
-		transition: opacity .3s ease-in-out, transform .3s ease-in-out
-		transform-origin center center
-		transform scale(1)
-
-	&--fade-enter &__transition, &--fade-leave-to > &__transition
-		opacity: 0
-		transform scale(0)
-
-	&__main
-		stroke #111
-		stroke #678
-		stroke-width 1px
-		fill none
-
-		stroke none
-		fill #DDD
-
-	&__mini
-		fill #111
-		fill #678
-
-	&--logo &__main
-		fill none
-		stroke-width 2px
-		stroke yellow
-		fill yellow
-
-		stroke: $base-color["api"]
-		fill: $base-color["api"]
-
-		&:nth-child(2n)
-			stroke: $base-color["blue"]
-			fill: $base-color["blue"]
-
-	&--logo &__mini
-		fill none
-		fill #111
-		pointer-events none
-
-
-</style>
 <script>
 import { _ } from "src/util";
 
@@ -105,6 +47,8 @@ export default {
 		logo: { type: Boolean, default: false },
 		ee  : { type: Boolean, default: false }
 	},
+
+	emits: ["deleted"],
 
 	data: function () {
 		const layout = [
@@ -122,7 +66,9 @@ export default {
 
 		return {
 			layout,
-			t: (this.type === null ? _.random(0, layout.length * 3) : this.type),
+			// Select random shape on "mounted" event (Prevent "Hydration completed but contains mismatches.")
+			// t: (this.type === null ? _.random(0, layout.length * 3) : this.type),
+			t: (this.type === null ? -1 : this.type),
 			goodBye: false
 		};
 	},
@@ -191,6 +137,11 @@ export default {
 		}
 	},
 
+	mounted() {
+		// Prevent "Hydration completed but contains mismatches."
+		this.t === -1 && this.updateCube();
+	},
+
 
 	// ### [Methods] ########################################
 
@@ -207,3 +158,48 @@ export default {
 
 };
 </script>
+<style lang="stylus">
+@import "~style/functions"
+
+
+.cube
+	position relative
+	display inline-block
+	width 32px
+	height 32px
+	opacity 1
+
+	&__transition
+		cursor pointer
+
+	&--fade-enter-active &__transition, &--fade-leave-active &__transition
+		transition opacity 0.3s ease-in-out, transform 0.3s ease-in-out
+		transform scale(1)
+		transform-origin center center
+
+	&--fade-enter &__transition, &--fade-leave-to > &__transition
+		opacity 0
+		transform scale(0)
+
+	&__main
+		fill #DDD
+		stroke none
+		stroke-width 1px
+
+	&__mini
+		fill #678
+
+	&--logo &__main
+		fill: $base-color["api"]
+		stroke-width 2px
+		stroke: $base-color["api"]
+
+		&:nth-child(2n)
+			fill: $base-color["blue"]
+			stroke: $base-color["blue"]
+
+	&--logo &__mini
+		pointer-events none
+		fill #111
+
+</style>

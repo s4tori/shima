@@ -10,11 +10,11 @@
 
 
 li.block-code
-	background: $base-color["bg-code"]
 	display flex
 	flex-direction column
 	padding shima-vr() 0
 	margin-bottom 0
+	background: $base-color["bg-code"]
 
 	h3
 		margin-left shima-span(1, "wide")

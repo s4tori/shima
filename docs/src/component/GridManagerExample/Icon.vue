@@ -4,14 +4,20 @@
 			:x-grid="128" :x-div="4" :x-gutter="-32"
 		>
 			<div class="gex-bp__icons">
-				<icon i="beaker" class="gex-bp__icon" />
-				<icon i="rocket" class="gex-bp__icon" />
-				<icon i="arrow"  class="gex-bp__icon" />
-				<icon i="kebab"  class="gex-bp__icon" />
+				<icon i="terminal"    class="gex-bp__icon" />
+				<icon i="arrow-heart" class="gex-bp__icon" />
+				<icon i="arrow"       class="gex-bp__icon" />
+				<icon i="layout"      class="gex-bp__icon" />
+				<icon i="translate"   class="gex-bp__icon" />
+				<icon i="kiss"        class="gex-bp__icon" />
 			</div>
 		</shima-grid-manager>
 	</div>
 </template>
+<script setup>
+import ShimaGridManager from "src/component/GridManager/GridManager.vue";
+import Icon             from "src/component/Icon.vue";
+</script>
 <style lang="stylus">
 @import "~style/functions"
 
@@ -21,23 +27,9 @@
 
 	&__icon
 		display inline-block
-		margin-left shima-vr()
-		margin-top shima-vr()
 		width shima-span()
 		height shima-span()
+		margin-top shima-vr()
+		margin-left shima-vr()
 
 </style>
-<script>
-import ShimaGridManager from "src/component/GridManager/GridManager.vue";
-import Icon             from "src/component/Icon.vue";
-
-
-export default {
-
-	components: {
-		ShimaGridManager,
-		Icon
-	}
-
-};
-</script>

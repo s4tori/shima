@@ -13,7 +13,7 @@
 
 		<block-option title="division">
 			<p>
-				Number of division per grid.<br />
+				Number of divisions per grid.<br />
 				Mandatory.
 			</p>
 		</block-option>
@@ -42,21 +42,9 @@
 		</block-option>
 	</block>
 </template>
-<script>
+<script setup>
 import Block       from "./Block.vue";
 import BlockUrl    from "./BlockUrl.vue";
 import BlockOption from "./BlockOption.vue";
 import Icon        from "src/component/Icon.vue";
-
-
-export default {
-
-	components: {
-		Block,
-		BlockUrl,
-		BlockOption,
-		Icon
-	}
-
-};
 </script>

@@ -26,9 +26,11 @@
 		</block-option>
 
 		<block-code>
-			<block-option title="hex"><p><span class="api-color__ex">FF00FF</span>090210</p></block-option>
-			<block-option title="rgb"><p><span class="api-color__ex">255-0-255</span>9-2-16</p></block-option>
-			<block-option title="rgba"><p><span class="api-color__ex">255-0-255-1</span>9-2-16-.5</p></block-option>
+			<ul>
+				<block-option title="hex"><p><span class="api-color__ex">FF00FF</span>090210</p></block-option>
+				<block-option title="rgb"><p><span class="api-color__ex">255-0-255</span>9-2-16</p></block-option>
+				<block-option title="rgba"><p><span class="api-color__ex">255-0-255-1</span>9-2-16-.5</p></block-option>
+			</ul>
 		</block-code>
 	</block>
 </template>

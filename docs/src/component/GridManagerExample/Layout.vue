@@ -23,6 +23,9 @@
 		</shima-grid-manager>
 	</div>
 </template>
+<script setup>
+import ShimaGridManager from "src/component/GridManager/GridManager.vue";
+</script>
 <style lang="stylus">
 @import "~style/functions"
 
@@ -36,33 +39,33 @@
 
 	&__sidebar, &__main
 		display flex
-		justify-content center
 		align-items center
+		justify-content center
 		height shima-vr(8)
-		margin-bottom: shima-vr()
+		margin-bottom shima-vr()
 		color black
-		background alpha(#EAEAEA, .8)
+		background alpha(#EAEAEA, 0.8)
 
 	&__sidebar
-		width shima-span()
 		flex 0 0 shima-span()
+		width shima-span()
 		margin-right shima-gutter()
-		background alpha(#0074D9, .9)
 		color white
+		background alpha(#5C87FF, 0.9)
 
 	&__main
 		flex 1
-		background alpha(#3D9970, .9)
 		color white
+		background alpha(#00D99E, 0.9)
 
 	&__col
 		display flex
-		justify-content center
-		margin-bottom: shima-vr()
 		align-items center
-		background alpha(#000, .1)
-		background alpha(#EAEAEA, .5)
-		box-shadow 0 3px 0px rgba(0,0,0,.1)
+		justify-content center
+		margin-bottom shima-vr()
+		background alpha(#000, 0.1)
+		background alpha(#EAEAEA, 0.5)
+		box-shadow 0 3px 0 rgba(0, 0, 0, 0.1)
 
 		&--narrow
 			width shima-span()
@@ -76,15 +79,3 @@
 			flex 1
 
 </style>
-<script>
-import ShimaGridManager from "src/component/GridManager/GridManager.vue";
-
-
-export default {
-
-	components: {
-		ShimaGridManager
-	}
-
-};
-</script>

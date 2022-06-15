@@ -4,6 +4,11 @@
 		<slot />
 	</li>
 </template>
+<script setup>
+defineProps({
+	title: { type: String, default: "" }
+});
+</script>
 <style lang="stylus">
 @import "~style/functions"
 @import "~style/mixins"
@@ -14,19 +19,10 @@
 		flex 0 0 shima-span()
 		margin-right shima-gutter()
 		shima-font-size(-2)
-		text-align right
 		color: $base-color["blue"]
+		text-align right
 
 	p
 		shima-font-size(-2)
 
 </style>
-<script>
-export default {
-
-	props: {
-		title: { type: String, default: "" }
-	}
-
-};
-</script>

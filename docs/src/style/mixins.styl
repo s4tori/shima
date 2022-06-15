@@ -6,17 +6,17 @@
 //    width: 500px
 shima-mq($bp)
 	for $key, $val in $base-bp
-		//p($key)
+		// p($key)
 		if $bp is $key
 			@media $val
 				{block}
 
 // Usage:
-// absolute: top left
-// absolute: top 5px left
-// absolute: top left 5px
-// absolute: top 5px left 5px
-absolute()
+// shima-absolute: top left
+// shima-absolute: top 5px left
+// shima-absolute: top left 5px
+// shima-absolute: top 5px left 5px
+shima-absolute()
 	i = 0
 	position absolute
 	for j in (1..4)
@@ -25,13 +25,13 @@ absolute()
 		i += 1
 
 reset-list()
-	margin 0
 	padding 0
+	margin 0
 	list-style-type none
 
 	li
-		margin 0
 		padding 0
+		margin 0
 
 reset-link()
 	color inherit

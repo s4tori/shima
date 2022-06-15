@@ -1,4 +1,3 @@
-/* global module */
 import Clipboard  from "./clipboard";
 
 
