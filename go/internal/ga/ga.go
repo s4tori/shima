@@ -18,7 +18,6 @@ const (
 	trackId = "UA-110169890-1"
 )
 
-
 // ==========================================================
 // Public functions
 // ----------------------------------------------------------
@@ -42,12 +41,12 @@ func GetCid(r *http.Request) string {
 	return opt[2] + "." + opt[3]
 }
 
-// Get the IP of the current user. Useful only to report correct geolocation.
+// GetIp Get the IP of the current user. Useful only to report correct geolocation.
 // The IP address of the sender will be anonymized.
 // See https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uip
 func GetIp(r *http.Request) string {
 	hdrRealIP := r.Header.Get("X-Real-Ip")
-	hdrFwdIP  := r.Header.Get("X-Forwarded-For")
+	hdrFwdIP := r.Header.Get("X-Forwarded-For")
 
 	if len(hdrFwdIP) == 0 && len(hdrRealIP) == 0 {
 		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
@@ -68,17 +67,16 @@ func GetIp(r *http.Request) string {
 // TrackPageEvent sends data to GA using the Measurement Protocol.
 func TrackPageEvent(r *http.Request) {
 	values := url.Values{}
-	values.Set("v"  , "1")
-	values.Add("t"  , "pageview")
+	values.Set("v", "1")
+	values.Add("t", "pageview")
 	values.Add("aip", "1")
 	values.Add("tid", trackId)
 	values.Add("uip", GetIp(r))
 	values.Add("cid", GetCid(r))
-	values.Add("dp" , r.URL.Path)
+	values.Add("dp", r.URL.Path)
 
 	go gaRequest(values, r.UserAgent())
 }
-
 
 // ==========================================================
 // Private functions
@@ -86,7 +84,7 @@ func TrackPageEvent(r *http.Request) {
 
 // generateCid generates a random CID.
 func generateCid() string {
-	return strconv.Itoa(rand.Intn(cidMax - cidMin) + cidMin)
+	return strconv.Itoa(rand.Intn(cidMax-cidMin) + cidMin)
 }
 
 // gaRequest creates an HTTP request to GA.
@@ -98,13 +96,12 @@ func gaRequest(values url.Values, userAgent string) {
 	}
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Set("User-Agent"  , userAgent)
+	req.Header.Set("User-Agent", userAgent)
 	_, err = http.DefaultClient.Do(req)
 
 	if err != nil {
 		log.Println(err)
 	}
 }
-
 
 // ==========================================================

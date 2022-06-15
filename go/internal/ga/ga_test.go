@@ -9,9 +9,9 @@ import (
 	"runtime"
 	"strings"
 	"testing"
-	"ga"
-)
 
+	"shima/internal/ga"
+)
 
 // ==========================================================
 // Public functions
@@ -54,7 +54,6 @@ func TestGetIp(t *testing.T) {
 	assertEquals(t, ga.GetIp(req), "5.6.7.8")
 }
 
-
 // ==========================================================
 // Private functions
 // ----------------------------------------------------------
@@ -83,7 +82,7 @@ func assertNotEquals(t *testing.T, got, want interface{}) {
 // initReq simulates an HTTP request withs cookies
 func initReq(rawCookies string) *http.Request {
 	rawRequest := fmt.Sprintf("GET / HTTP/1.0\r\nCookie: %s\r\n\r\n", rawCookies)
-	req, _     := http.ReadRequest(bufio.NewReader(strings.NewReader(rawRequest)))
+	req, _ := http.ReadRequest(bufio.NewReader(strings.NewReader(rawRequest)))
 
 	return req
 }
@@ -106,6 +105,5 @@ func initReqIp(xFrdFor, xReadlIp, remoteIp string) *http.Request {
 
 	return req
 }
-
 
 // ==========================================================

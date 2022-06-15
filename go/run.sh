@@ -2,19 +2,19 @@
 # 547021
 #
 # Go source-code:
-# * Local packages inside ./src
-# * Local binary inside ./bin
+# * Main application in ./cmd
+# * Private code in     ./bin
+# * Local binary in     ./bin
 # * Global dependencies inside the global workspace ($GOPATH)
 
 
 # ------------------- [Variables] -------------------
 # Set "GOPATH" to help Go to find our local package
-OLD_GOPATH=$GOPATH
-export GOPATH=$PWD
 export GOBIN=$PWD/bin
-GO_MAIN=src/shima.go
+GO_MAIN=cmd/shima/shima.go
 GO_DEPS=(
-	"github.com/pilu/fresh"
+	"github.com/markbates/refresh@latest"
+	"golang.org/x/tools/cmd/godoc@latest"
 )
 
 MSG_HEADER="\e[1;39m"
@@ -31,9 +31,9 @@ function log {
 }
 
 function dev {
-	log "Run (DEV mode with fresh)"
+	log "Run (DEV mode with refresh)"
 	export __GO_DEV__=1
-	fresh
+	refresh
 }
 
 function build {
@@ -46,12 +46,11 @@ function init {
 	# Undo "GOPATH" to install global dependencies inside the original global worskpace
 	# It prevents dependencies to pollute the local workspace (src, pkc, bin)
 	unset GOBIN
-	export GOPATH=$OLD_GOPATH
 
 	for i in "${GO_DEPS[@]}"
 	do
 		log "Install dependency:" $i
-		go get $i
+		go install $i
 	done
 }
 
@@ -59,12 +58,15 @@ function doc {
 	log "Doc"
 	log "See" "http://localhost:6060/pkg/"
 	godoc -http=:6060 -goroot="."
-	#godoc -http=:6060
 }
 
 function test {
 	log "Test" "config ga svg util"
-	go test config ga svg util
+	go test shima/internal/...
+
+	if [ "$?" -ne "0" ]; then
+		die
+	fi
 }
 
 function format {

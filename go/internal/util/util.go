@@ -12,7 +12,7 @@ import (
 var (
 	regHex  = regexp.MustCompile("^(?:[[:xdigit:]]{3}|[[:xdigit:]]{6})$")
 	regRgb  = regexp.MustCompile("^[0-9]{1,3}-[0-9]{1,3}-[0-9]{1,3}$")
-	regRbga = regexp.MustCompile("^[0-9]{1,3}-[0-9]{1,3}-[0-9]{1,3}-(?:0|1|0?.[0-9]{1})$")
+	regRbga = regexp.MustCompile("^[0-9]{1,3}-[0-9]{1,3}-[0-9]{1,3}-(?:0|1|0?.[0-9])$")
 	emojis  = []string{"(-_-')", "(;-;)", "(&gt;_&lt;)", "(˚Δ˚)"}
 )
 
@@ -24,7 +24,7 @@ func Ife(cond bool, condTrue, condFalse int) int {
 	return condFalse
 }
 
-// Max returns the smallest integer.
+// Min returns the smallest integer.
 // See: https://mrekucci.blogspot.fr/2015/07/dont-abuse-mathmax-mathmin.html
 func Min(x, y int) int {
 	return Ife(x < y, x, y)

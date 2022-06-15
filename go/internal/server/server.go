@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"io/ioutil"
@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"route"
+	"shima/internal/route"
 )
 
 const (
@@ -15,7 +15,7 @@ const (
 	loggingFormat = true
 )
 
-func main() {
+func Run() {
 	ex, _   := os.Executable()
 	devMode := os.Getenv("__GO_DEV__") == "1"
 
@@ -28,7 +28,7 @@ func main() {
 	log.Println("  ♥                 (^.^)/   shima   \\(^.^)                ♥")
 	log.Println(" ")
 	log.Println(" ", "dirname:", filepath.Dir(ex))
-	log.Println(" ", "server :", server)
+	log.Println(" ", "server : http://"+server+"/img")
 	log.Println(" ", "dev    :", devMode)
 	log.Println(" ")
 	log.Println(" ", `☕️ Server started!`)
@@ -41,10 +41,10 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	route.HandleFunc(mux, "/img/", true   , route.HandlerSvg)
+	route.HandleFunc(mux, "/img/", true, route.HandlerSvg)
 	route.HandleFunc(mux, "/css/", devMode, route.HandlerCss)
 	route.HandleFunc(mux, "/htm/", devMode, route.HandlerHtm)
-	route.HandleFunc(mux, "/"    , true   , route.HandlerDefault)
+	route.HandleFunc(mux, "/", true, route.HandlerDefault)
 	err := http.ListenAndServe(server, mux)
 
 	if err != nil {

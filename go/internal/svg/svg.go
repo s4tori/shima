@@ -5,7 +5,8 @@ package svg
 import (
 	"fmt"
 	"io"
-	"util"
+
+	"shima/internal/util"
 )
 
 // SVG defines the generated SVG.
@@ -16,7 +17,6 @@ type SVG struct {
 const (
 	ff = "system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif"
 )
-
 
 // ==========================================================
 // Public functions
@@ -72,19 +72,18 @@ func (svg *SVG) Rect(x, y, w, h int, fill string) {
 	svg.printf(`<rect x="%d" y="%d" width="%d" height="%d" fill="%s" />%s`, x, y, w, h, fill, "\n")
 }
 
-// Rect draws a rectangle width 100% width and height.
+// RectFill draws a rectangle width 100% width and height.
 func (svg *SVG) RectFill(fill string) {
 	svg.printf(`<rect x="0" y="0" width="100%%" height="100%%" fill="%s" />%s`, fill, "\n")
 }
 
-// Text defines a text error (at the center of the SVG).
+// TextError defines a text error (at the center of the SVG).
 func (svg *SVG) TextError(err error) {
 	emoji := util.GetEmoji()
 	svg.RectFill("rgba(0,0,0,.8)")
 	svg.printf(`<text x="50%%" y="50%%" fill="#f03" font-family="%s" font-size="30px" text-anchor="middle">Error %s</text>%s`, ff, emoji, "\n")
 	svg.printf(`<text x="50%%" y="50%%" fill="#f03" font-family="%s" font-size="20px" transform="translate(0, 30)" text-anchor="middle">%s</text>%s`, ff, err.Error(), "\n")
 }
-
 
 // ==========================================================
 // Private functions
@@ -104,6 +103,5 @@ func (svg *SVG) println(a ...interface{}) (n int, err error) {
 func (svg *SVG) printf(format string, a ...interface{}) (n int, err error) {
 	return fmt.Fprintf(svg.Writer, format, a...)
 }
-
 
 // ==========================================================

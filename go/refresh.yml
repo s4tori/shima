@@ -1,0 +1,13 @@
+app_root: .
+binary_name: refresh-build
+build_delay: 1000ms
+build_path: ./tmp
+build_target_path: "./cmd/shima"
+enable_colors: true
+ignored_folders:
+- vendor
+- tmp
+- node_modules
+- bin
+included_extensions:
+- .go

@@ -6,7 +6,8 @@ import (
 	"reflect"
 	"runtime"
 	"testing"
-	"config"
+
+	"shima/internal/config"
 )
 
 // ==========================================================
@@ -42,7 +43,7 @@ func TestYAxis(t *testing.T) {
 	assertType(t, c, "standard")
 
 	c = initConfig("/64x4x0x000/32x2x12xFFF")
-	assertAxis(t, c, "X", 64, 4,  0, "#000", config.DefDivC, true, true , false)
+	assertAxis(t, c, "X", 64, 4, 0, "#000", config.DefDivC, true, true, false)
 	assertAxis(t, c, "Y", 32, 2, 12, "#FFF", config.DefDivC, true, false, false)
 	assertType(t, c, "standard")
 
@@ -65,10 +66,9 @@ func TestType(t *testing.T) {
 
 	c = initConfig("/64x4x32x000/32x2x0xFFF/isometric")
 	assertAxis(t, c, "X", 64, 4, 32, "#000", config.DefDivC, true, false, false)
-	assertAxis(t, c, "Y", 32, 2,  0, "#FFF", config.DefDivC, true, true , false)
+	assertAxis(t, c, "Y", 32, 2, 0, "#FFF", config.DefDivC, true, true, false)
 	assertType(t, c, "isometric")
 }
-
 
 // ==========================================================
 // Private functions
@@ -93,14 +93,14 @@ func assertEquals(t *testing.T, got, want interface{}) {
 // assertAxis fails the test if the axis is incorrect
 func assertAxis(t *testing.T, c interface{}, axis string, grid, div, gutter int, gridC, divC string, show, gutterShow, GutterBefore bool) {
 	cElem := reflect.ValueOf(c).Elem()
-	assertEquals(t, cElem.FieldByName(axis + "Grid"  ).Int()     , int64(grid))
-	assertEquals(t, cElem.FieldByName(axis + "Div"   ).Int()     , int64(div))
-	assertEquals(t, cElem.FieldByName(axis + "Gutter").Int()     , int64(gutter))
-	assertEquals(t, cElem.FieldByName(axis + "GridC").String()   , gridC)
-	assertEquals(t, cElem.FieldByName(axis + "DivC").String()    , divC)
-	assertEquals(t, cElem.FieldByName(axis + "Show").Bool()      , show)
-	assertEquals(t, cElem.FieldByName(axis + "GutterShow").Bool(), gutterShow)
-	assertEquals(t, cElem.FieldByName(axis + "GutterBefore").Bool(), GutterBefore)
+	assertEquals(t, cElem.FieldByName(axis+"Grid").Int(), int64(grid))
+	assertEquals(t, cElem.FieldByName(axis+"Div").Int(), int64(div))
+	assertEquals(t, cElem.FieldByName(axis+"Gutter").Int(), int64(gutter))
+	assertEquals(t, cElem.FieldByName(axis+"GridC").String(), gridC)
+	assertEquals(t, cElem.FieldByName(axis+"DivC").String(), divC)
+	assertEquals(t, cElem.FieldByName(axis+"Show").Bool(), show)
+	assertEquals(t, cElem.FieldByName(axis+"GutterShow").Bool(), gutterShow)
+	assertEquals(t, cElem.FieldByName(axis+"GutterBefore").Bool(), GutterBefore)
 }
 
 // assertType fails the test if the type is incorrect
@@ -115,6 +115,5 @@ func initConfig(path string) interface{} {
 	c.ParseFromUri(path)
 	return c
 }
-
 
 // ==========================================================

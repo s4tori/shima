@@ -8,7 +8,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-	"util"
+
+	"shima/internal/util"
 )
 
 // config defines the configuration to generate the SVG.
@@ -60,7 +61,6 @@ var (
 	validType = regexp.MustCompile("^([a-z\\-]+)$")
 )
 
-
 // ==========================================================
 // Public functions
 // ----------------------------------------------------------
@@ -81,16 +81,24 @@ func New() *config {
 
 // EndConfig calculates computed variables.
 func (c *config) EndConfig() {
-	if c.XGrid   == 0 && c.XGutter == 0 { c.YShow = false }
-	if c.YGrid   == 0 && c.YGutter == 0 { c.XShow = false }
-	if c.XGutter == 0 || !c.YShow { c.YGutterShow = false }
-	if c.YGutter == 0 || !c.XShow { c.XGutterShow = false }
-	c.XGrid       = util.Ife(c.XGrid == 0, c.YGrid, c.XGrid)
-	c.YGrid       = util.Ife(c.YGrid == 0, c.XGrid, c.YGrid)
-	c.XCell       = c.XGrid / util.Max(1, c.XDiv)
-	c.YCell       = c.YGrid / util.Max(1, c.YDiv)
-	c.XGridGutter = c.XGrid + c.XGutter;
-	c.YGridGutter = c.YGrid + c.YGutter;
+	if c.XGrid == 0 && c.XGutter == 0 {
+		c.YShow = false
+	}
+	if c.YGrid == 0 && c.YGutter == 0 {
+		c.XShow = false
+	}
+	if c.XGutter == 0 || !c.YShow {
+		c.YGutterShow = false
+	}
+	if c.YGutter == 0 || !c.XShow {
+		c.XGutterShow = false
+	}
+	c.XGrid = util.Ife(c.XGrid == 0, c.YGrid, c.XGrid)
+	c.YGrid = util.Ife(c.YGrid == 0, c.XGrid, c.YGrid)
+	c.XCell = c.XGrid / util.Max(1, c.XDiv)
+	c.YCell = c.YGrid / util.Max(1, c.YDiv)
+	c.XGridGutter = c.XGrid + c.XGutter
+	c.YGridGutter = c.YGrid + c.YGutter
 }
 
 // ParseFromUri creates a new configuration objet based on the provided URI.
@@ -98,7 +106,7 @@ func (c *config) ParseFromUri(uri string) error {
 	var errXAxis, errYAxis, errGType error
 	var skip bool
 
-	opt  := strings.Split(strings.Trim(uri, "/"), "/")
+	opt := strings.Split(strings.Trim(uri, "/"), "/")
 	oLen := len(opt)
 
 	// A complete URI needs 3 items:
@@ -128,13 +136,13 @@ func (c *config) ParseFromUri(uri string) error {
 
 // String displays a config struct.
 func (c *config) String() string {
-	return fmt.Sprintf("\n[Config]\n" +
-		"*  x: %3d, %2d, %2d (xCell: %2d)\n" +
-		"*  y: %3d, %2d, %2d (yCell: %2d)\n" +
-		"* bX: XShow:%5t, XGutterShow:%5t, XGutterBefore:%5t\n" +
-		"* bY: YShow:%5t, YGutterShow:%5t, YGutterBefore:%5t\n" +
-		"* cX: %s, %s\n" +
-		"* cY: %s, %s\n" +
+	return fmt.Sprintf("\n[Config]\n"+
+		"*  x: %3d, %2d, %2d (xCell: %2d)\n"+
+		"*  y: %3d, %2d, %2d (yCell: %2d)\n"+
+		"* bX: XShow:%5t, XGutterShow:%5t, XGutterBefore:%5t\n"+
+		"* bY: YShow:%5t, YGutterShow:%5t, YGutterBefore:%5t\n"+
+		"* cX: %s, %s\n"+
+		"* cY: %s, %s\n"+
 		"*  t: %s, %s\n",
 		c.XGrid, c.XDiv, c.XGutter, c.XCell,
 		c.YGrid, c.YDiv, c.YGutter, c.YCell,
@@ -145,7 +153,6 @@ func (c *config) String() string {
 		c.GridType, c.GridTypeMatrix,
 	)
 }
-
 
 // ==========================================================
 // Private functions
@@ -158,12 +165,12 @@ func (c *config) parseAxisFromUri(uri, kAxis string) error {
 		return errors.New("Invalid " + kAxis + " axis")
 	}
 
-	c.setValue(kAxis + "Grid"        , m[1])
-	c.setValue(kAxis + "Div"         , m[2])
-	c.setValue(kAxis + "Gutter"      , m[4])
-	c.setValue(kAxis + "GutterBefore", m[3] == "-")
-	c.setValue(kAxis + "GridC"       , util.GetColor(util.GetIndex(m, 5, "")))
-	c.setValue(kAxis + "DivC"        , util.GetColor(util.GetIndex(m, 6, "")))
+	c.setValue(kAxis+"Grid", m[1])
+	c.setValue(kAxis+"Div", m[2])
+	c.setValue(kAxis+"Gutter", m[4])
+	c.setValue(kAxis+"GutterBefore", m[3] == "-")
+	c.setValue(kAxis+"GridC", util.GetColor(util.GetIndex(m, 5, "")))
+	c.setValue(kAxis+"DivC", util.GetColor(util.GetIndex(m, 6, "")))
 
 	return nil
 }
@@ -212,11 +219,10 @@ func (c *config) setGridType(gridType string) error {
 	}
 
 	if !ok {
-		return errors.New("Invalid grid type")
+		return errors.New("invalid grid type")
 	}
 
 	return nil
 }
-
 
 // ==========================================================

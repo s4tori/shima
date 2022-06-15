@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
-	"svg"
-)
 
+	"shima/internal/svg"
+)
 
 // ==========================================================
 // Public functions
@@ -52,7 +52,6 @@ func TestRect(t *testing.T) {
 	assertSvg(t, b, fmt.Sprintf(`<rect x="1" y="2" width="3" height="4" fill="blue" />%s`, "\n"))
 }
 
-
 // ==========================================================
 // Private functions
 // ----------------------------------------------------------
@@ -80,6 +79,5 @@ func initSvg() (*svg.SVG, *bytes.Buffer) {
 	s := svg.New(b)
 	return s, b
 }
-
 
 // ==========================================================
