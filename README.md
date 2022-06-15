@@ -45,7 +45,7 @@ Shima is [MIT licensed](./LICENSE).
 [//]: # (---------------------------------------------------------------------)
 
 [//]: # (Badges)
-[build-img-shima]: https://github.com/s4tori/shima-upgrade/actions/workflows/workflow-go.yml/badge.svg
-[build-img-doc]:   https://github.com/s4tori/shima-upgrade/actions/workflows/workflow-docs.yml/badge.svg
+[build-img-shima]: https://github.com/s4tori/shima/actions/workflows/workflow-go.yml/badge.svg
+[build-img-doc]:   https://github.com/s4tori/shima/actions/workflows/workflow-docs.yml/badge.svg
 [license]:         https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]:     ./LICENSE
