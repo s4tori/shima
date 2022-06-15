@@ -1,0 +1,52 @@
+############################################################################
+# Documentation
+############################################################################
+
+name: 📚 Doc
+on:
+    push:
+        branches:
+            - master
+        paths:
+            - "docs/**"
+
+defaults:
+    run:
+        working-directory: docs
+
+jobs:
+    build:
+        name: 📚 Build and deploy documentation
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - name: 🛎️ Checkout code
+              uses: actions/checkout@v3
+
+            - name: 🚚 Setup PNPM
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 7
+
+            - name: 🚚 Setup Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: 16
+                cache: pnpm
+                cache-dependency-path: docs/pnpm-lock.yaml
+
+            - name: 👷 Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: 🏗️ Build project
+              run: pnpm run build:prod
+
+            - name: 🚀 Deploy documentation
+              uses: JamesIves/github-pages-deploy-action@v4.3.3
+              with:
+                branch: gh-pages
+                folder: docs/dist
+                clean: true
+                silent: true

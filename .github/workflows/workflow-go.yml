@@ -1,0 +1,59 @@
+############################################################################
+# Go server
+############################################################################
+
+name: 🚀 Shima
+on:
+    push:
+        branches:
+            - master
+        paths:
+            - "go/**"
+
+defaults:
+    run:
+        working-directory: go
+
+jobs:
+    build:
+        name: 🚀 Build and deploy go server
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 🛎️ Checkout code
+              uses: actions/checkout@v3
+
+            - name: 🚚 Setup Go
+              uses: actions/setup-go@v3
+              with:
+                  go-version: ^1.18
+
+            - name: ☂️ Run unit tests
+              run: ./run.sh -t
+
+            - name: 🏗️ Build project
+              run: ./run.sh -b
+
+            - name: 🚀 Deploy program
+              run: |
+                  mkdir -p ~/.ssh/
+                  echo -e "$SSH_PKEY" > ~/.ssh/$KEY_NAME
+                  chmod 600 ~/.ssh/$KEY_NAME
+                  cat >>~/.ssh/config <<END
+                  Host *
+                    user $SSH_USER
+                    HostName $SSH_HOST
+                    Port $SSH_PORT
+                    IdentityFile ~/.ssh/$KEY_NAME
+                    StrictHostKeyChecking no
+                    LogLevel quiet
+                  END
+                  rsync -p --chmod=700 ./bin/shima $SSH_HOST:$SSH_DIST/shima
+                  ssh $SSH_HOST ". /etc/profile ; pm2 restart shima > /dev/null"
+              env:
+                  SSH_DIST: ${{ secrets.SSH_DIST }}
+                  SSH_HOST: ${{ secrets.SSH_HOST }}
+                  SSH_PKEY: ${{ secrets.SSH_PKEY }}
+                  SSH_PORT: ${{ secrets.SSH_PORT }}
+                  SSH_USER: ${{ secrets.SSH_USER }}
+                  KEY_NAME: id_github
